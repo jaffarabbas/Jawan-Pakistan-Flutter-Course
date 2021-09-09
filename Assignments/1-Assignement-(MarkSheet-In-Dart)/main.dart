@@ -231,7 +231,7 @@ Main Function
 */
 
 void main() {
-  //calling one function in main function
+  //calling Test function in main function
   //reason : clearing the main function with long code
   Test();
 }
