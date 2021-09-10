@@ -22,7 +22,7 @@ String Subject4 = "WebDevelopment";
 String Subject5 = "Physics";
 //Subjects Marks 
 num Math = 86.45;
-num Chemistry = 90.35;
+num Chemistry = 40.35;
 num Programming = 90.45;
 num WebDevelopment = 90.77;
 num Physics = 94.43;
@@ -97,9 +97,21 @@ num CalculateAverage(){
   return TotalObtainedNumbers() ~/ 5;
 }
 
+//Check Fail Subject for total grading 
+bool CheckFailSubjectForTotalGrade(){
+   if(CalculateGradePerSubject(Math) == 'F' || CalculateGradePerSubject(Chemistry) == 'F'|| 
+    CalculateGradePerSubject(Programming) == 'F' || CalculateGradePerSubject(WebDevelopment) == 'F' ||
+    CalculateGradePerSubject(Physics) == 'F'){
+      return true;
+    }
+    return false;
+}
 //Average Grade distribution
 String CalculateTotalGrade(){
-  if(CalculateAverage() >= 90 && CalculateAverage() <= 100  && StudentAttendense >= 75){
+  if(CheckFailSubjectForTotalGrade() == true){
+    return "F";
+  }
+  else if(CalculateAverage() >= 90 && CalculateAverage() <= 100  && StudentAttendense >= 75){
     return "A+";
   }
   else if(CalculateAverage() >= 80 && CalculateAverage() <= 89 && StudentAttendense >= 75){
@@ -171,7 +183,7 @@ void AssiginingDefaultMarksOnAbcense(){
 String ReasonForFailer(){
   if(StudentAttendense < 75){
     return "| Reason For Failer |\t\t|  Short Atendence |\n"+
-    "====================================================\n";
+    "\t\t====================================================\n";
   }else{
     return "";
   }
