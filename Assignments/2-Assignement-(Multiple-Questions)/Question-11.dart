@@ -3,6 +3,7 @@
 
 void main() {
   String Name = "Hyderabad";
+  //concept is about substring
   String ChangedString = Name.replaceAll('Hyder', 'Islam');
   print('Previous String : ${Name}\nReplaced String : ${ChangedString}');
 }
