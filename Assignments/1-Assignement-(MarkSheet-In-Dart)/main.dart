@@ -22,13 +22,13 @@ String Subject4 = "WebDevelopment";
 String Subject5 = "Physics";
 //Subjects Marks 
 num Math = 86.45;
-num Chemistry = 40.35;
+num Chemistry = 90.35;
 num Programming = 90.45;
 num WebDevelopment = 90.77;
 num Physics = 94.43;
 num TotalNumbers = 500;
 //addendence criteria.
-num StudentAttendense = 75;
+num StudentAttendense = 74;
 //Student Exam Attendence
 bool Subject1Precence = true;
 bool Subject2Precence = true;
