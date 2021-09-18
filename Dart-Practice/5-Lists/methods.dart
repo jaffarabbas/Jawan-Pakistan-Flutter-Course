@@ -17,7 +17,9 @@ void main() {
   //remove at index
   list.removeAt(3);
   print(list);
-  list.asMap().forEach((key, value) {
-    print('$key - $value');
-  });
+  //sorting
+  list.sort();
+  print(list);
+  //reverse list
+  print(list.reversed);
 }
