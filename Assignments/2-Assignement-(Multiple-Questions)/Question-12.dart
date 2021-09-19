@@ -12,14 +12,15 @@
 // & Gross Amount Payable (after Due Date) = Net Amount + Late Payment Surcharge
 String CustumerName = "Jaffar Abbas";
 String CurrentMonth = "September";
-num PricesPerUnit = 120;
-num NumberOfUnits = 300;
+num PricesPerUnit = 120.22;
+num NumberOfUnits = 300.32;
 String Date = "19-9-2021";
 String DueDate = "1-10-2021";
 num LateCharges = 70;
 void main() {
-  num NetAmountPayableWithInDueDate = NumberOfUnits * PricesPerUnit;
-  num NetAmountPayableAfterDueDate = NetAmountPayableWithInDueDate + LateCharges;
+  //upto 2 decimal places
+  num NetAmountPayableWithInDueDate = double.parse((NumberOfUnits * PricesPerUnit).toStringAsFixed(2));;
+  num NetAmountPayableAfterDueDate = double.parse((NetAmountPayableWithInDueDate + LateCharges).toStringAsFixed(2));
 
   print("Customer Name : $CustumerName\n"+
   "Current Month : $CurrentMonth\n"+
