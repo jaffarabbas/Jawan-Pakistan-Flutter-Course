@@ -24,3 +24,7 @@ doc/api/
 *.pdf
 *.docs
 *.pptx
+
+#commit Files
+*.py
+*.bat
