@@ -21,11 +21,8 @@ void main() {
   while(ballList.length > 0) {
     //each itration will take first element from the main list
     String checkElement = ballList.removeAt(0);
-    //check main list if it contain the checkElement 
-    if(ballList.contains(checkElement)){
-      //main list remove all emelent thats are equal to checkELements
-      ballList.removeWhere((element) => element == checkElement);
-    }
+    //main list remove all emelent thats are equal to checkELements
+    ballList.removeWhere((element) => element == checkElement);
     //now adding the checkElement to temporary list 
     checkDublication.add(checkElement);
   }
