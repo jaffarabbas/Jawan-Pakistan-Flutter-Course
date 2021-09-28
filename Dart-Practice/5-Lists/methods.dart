@@ -30,14 +30,6 @@ void Any(){
   // Checks whether any element of this iterable satisfies test.
   // Checks every element in iteration order, and returns true if any of them make test return true,
   // otherwise returns false
-  //implementation in backend
-  // bool any(bool test(E element)) {
-  //   for (E element in this) {
-  //     if (test(element)) return true;
-  //   }
-  //   return false;
-  // }
-  // Any element
   print(list.any((element) => element < 12));
 }
 //asMap
@@ -77,13 +69,6 @@ void Every() {
   // Checks whether every element of this iterable satisfies test
   // Checks every element in iteration order, and returns false if any of them make test return false, 
   // otherwise returns true.
-  // bool every(bool test(E element)) {
-  // for (E element in this) {
-  //   if (!test(element)) return false;
-  // }
-  //   return true;
-  // }
-  //every element
   print(list.every((element) => element > 3));
 }
 //Expand
@@ -158,17 +143,24 @@ void Join(){
   print(list.join("\t"));
 }
 // lastIndexOf(E element, [int? start]) → int
-// The last index of element in this list. [...]
 void LastIndexOf(){
+// The last index of element in this list. [...]
   print(list3.lastIndexOf('1dsf',0));
   //If start is not provided, this method searches from the end of the list.
   print(list3.lastIndexOf('1dsf'));
 }
 // lastIndexWhere(bool test(E element), [int? start]) → int
+void LastIndexWhere() {
 // The last index in the list that satisfies the provided test. [...]
+  var l = list.lastIndexWhere((element) => element > 1);
+  print(l);
+}
 // lastWhere(bool test(E element), {E orElse()?}) → E
+void LastWhere() {
 // Returns the last element that satisfies the given predicate test. [...]
-// inherited
+  var l = list.lastWhere((element) => element - 3 == 1);
+  print(l);
+}
 // map<T>(T toElement(E e)) → Iterable<T>
 // The current elements of this iterable modified by toElement. [...]
 // inherited
@@ -248,5 +240,5 @@ void Suffle(){
   print(list);
 }
 void main() {
-  LastIndexOf();    
+  LastWhere();    
 }
