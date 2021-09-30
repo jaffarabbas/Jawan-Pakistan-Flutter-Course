@@ -163,7 +163,7 @@ void LastWhere() {
 }
 // map<T>(T toElement(E e)) → Iterable<T>
 // The current elements of this iterable modified by toElement. [...]
-// inherited
+
 // noSuchMethod(Invocation invocation) → dynamic
 // Invoked when a non-existent method or property is accessed. [...]
 // inherited
