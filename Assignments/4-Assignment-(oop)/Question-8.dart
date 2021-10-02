@@ -14,9 +14,11 @@ class AccountGenerate {
     return AccountNumber;
   } 
 }
-
+// here we have a inheritance
 class UserInformation extends AccountGenerate{
+  //new account number will call as a inherited function
   void NewUser(var name){
+    //super keyword refer to parrent intances
     super.AccountCollections.add([name,this.NewAccountNumber()]);
   }
 }
