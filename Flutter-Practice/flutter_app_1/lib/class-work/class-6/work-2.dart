@@ -10,7 +10,7 @@ class HomeList extends StatelessWidget {
   //to populate a list of RowCombiner
   List<Widget> Populate(){
     List<Widget> lst = [];
-    for (int i = 0; i < 5; i++){
+    for (int i = 0; i < 20; i++){
       lst.add(RowCombiner());
     }
     return lst;
@@ -23,11 +23,13 @@ class HomeList extends StatelessWidget {
         appBar: AppBar(
           title : Text('My App'),
         ),
-        body: Center(
-            child: Column(
-              children: Populate(),
+        body: SingleChildScrollView(
+          child: Center(
+              child: Column(
+                children: Populate(),
+              ),
             ),
-          ),
+        ),
       )
     );
   }
