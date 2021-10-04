@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, file_names
+// ignore_for_file: prefer_const_constructors, file_names, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 
@@ -17,9 +17,25 @@ class LeftCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         color: Colors.red,
       ),
-      child: Text(
-        'Jaffar',
-        style: TextStyle(color: Colors.white),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Header',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+            ),
+            textAlign: TextAlign.left,
+          ),
+          Text(
+            'ajskdhkashdkjahdkjahdkhasdkjhaskjdhas',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 12,
+            ),
+          ),
+        ],
       ),
     );
   }
