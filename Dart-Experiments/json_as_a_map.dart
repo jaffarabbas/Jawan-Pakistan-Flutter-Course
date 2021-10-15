@@ -6,7 +6,7 @@ void main() {
       1:{
         "firendId":1,
         "image":"",
-        "username":"",
+        "username":"gfg",
       },
       2:{
         "firendId":2,
@@ -16,14 +16,14 @@ void main() {
     },
     "chatList":{
       1:{
-          "mainUser":"",
-          "chatUser":"",
+          "mainUser":"'username'+'id'",
+          "chatUser":"'username'+'id'",
           "messsges":{
-             "mainUserMessages1":{
+             "mainUser+messageid":{
                "message":"",
                "timestamps":"",
              },
-             "chatUserMessages1":{
+             "chatUser+messageid":{
                "message":"",
                "timestamps":"",
              }
@@ -32,7 +32,8 @@ void main() {
     }
   };
 
-  map.forEach((key, value) {
-    print(value);
-  });
+  // map.forEach((key, value) {
+  //   print(value);
+  // });
+  print(map["friendsList"][1]["username"]);
 }
