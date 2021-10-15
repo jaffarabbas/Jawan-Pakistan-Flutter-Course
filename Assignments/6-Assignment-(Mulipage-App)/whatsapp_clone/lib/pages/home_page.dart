@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/pages/chat_list.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({ Key? key }) : super(key: key);
@@ -65,10 +66,10 @@ class HomePage extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            Text('sadasd'),
-            Text('sadasd'),
-            Text('sadasd2'),
-            Text('sadasd3'),
+            ChatList(),
+            ChatList(),
+            ChatList(),
+            ChatList(),
           ],
         ),
       ),
