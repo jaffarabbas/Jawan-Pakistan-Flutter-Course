@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/pages/chat_page.dart';
 import 'package:whatsapp_clone/pages/home_page.dart';
+import 'package:whatsapp_clone/utils/routes.dart';
 
 void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
@@ -17,6 +19,11 @@ class MyApp extends StatelessWidget {
       home: Material(
         child: HomePage(),
       ),
+      initialRoute: AppRoutes.chatRoute,
+      routes: {
+        AppRoutes.homeRoute: (context) => HomePage(),
+        AppRoutes.chatRoute: (context) => ChatScreen(),
+      },
     );
   }
 }
