@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       home: Material(
         child: HomePage(),
       ),
-      initialRoute: AppRoutes.chatRoute,
+      initialRoute: AppRoutes.homeRoute,
       routes: {
         AppRoutes.homeRoute: (context) => HomePage(),
         AppRoutes.chatRoute: (context) => ChatScreen(),
