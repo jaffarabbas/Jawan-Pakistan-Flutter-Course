@@ -1,6 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/widgits/AppChatBubble.dart';
+import 'package:whatsapp_clone/widgits/ChatTextFeild.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -10,9 +12,11 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  bool flag = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.yellow[50],
       appBar: AppBar(
         backgroundColor: Colors.green,
         titleSpacing: 0.0,
@@ -42,7 +46,49 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
         ],
       ),
-      body: Text('sad'),
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  AppChatBubble(isUserMessage: true),
+                  AppChatBubble(isUserMessage: false),
+                  AppChatBubble(isUserMessage: true),
+                  AppChatBubble(isUserMessage: false),
+                  AppChatBubble(isUserMessage: true),
+                  AppChatBubble(isUserMessage: true),
+                  AppChatBubble(isUserMessage: false),
+                  AppChatBubble(isUserMessage: true),
+                  AppChatBubble(isUserMessage: false),
+                  AppChatBubble(isUserMessage: true),
+                  AppChatBubble(isUserMessage: true),
+                  AppChatBubble(isUserMessage: false),
+                  AppChatBubble(isUserMessage: true),
+                  AppChatBubble(isUserMessage: false),
+                  AppChatBubble(isUserMessage: true),
+                  AppChatBubble(isUserMessage: true),
+                  AppChatBubble(isUserMessage: false),
+                  AppChatBubble(isUserMessage: true),
+                  AppChatBubble(isUserMessage: false),
+                  AppChatBubble(isUserMessage: true),
+                  AppChatBubble(isUserMessage: true),
+                  AppChatBubble(isUserMessage: false),
+                  AppChatBubble(isUserMessage: true),
+                  AppChatBubble(isUserMessage: false),
+                  AppChatBubble(isUserMessage: true),
+                  AppChatBubble(isUserMessage: true),
+                  AppChatBubble(isUserMessage: false),
+                  AppChatBubble(isUserMessage: true),
+                  AppChatBubble(isUserMessage: false),
+                  AppChatBubble(isUserMessage: true),
+               ],
+              ),
+            ),
+          ),
+          AppChatFeild(),
+        ],
+      ),
     );
   }
 }
