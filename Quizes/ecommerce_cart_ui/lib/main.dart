@@ -15,6 +15,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  int currentBottomNavigationIndex = 0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -64,8 +65,66 @@ class _AppState extends State<App> {
             )
           ],
         ),
-        body: SingleChildScrollView(
-          child: HomePage(),
+        body: HomePage(),
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: (index) => setState(() => currentBottomNavigationIndex = index),
+          currentIndex: currentBottomNavigationIndex,
+          type: BottomNavigationBarType.fixed,
+          // fixedColor: Colors.red,
+          selectedLabelStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+          unselectedLabelStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+          selectedItemColor: Colors.red,
+          unselectedItemColor: Colors.red,
+          selectedFontSize: 18,
+          unselectedFontSize: 14,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home_outlined,
+                  color: Colors.red,
+                  size: 40,
+                ),
+                label: 'Home',
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.grid_on_sharp,
+                  color: Colors.red,
+                  size: 40,
+                ),
+                label: 'Catalog',
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.shopping_bag_outlined,
+                  color: Colors.red,
+                  size: 40,
+                ),
+                label: 'Bag',
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.person_outline_rounded,
+                  color: Colors.red,
+                  size: 40,
+                ),
+                label: 'Profile',
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.more_horiz,
+                  color: Colors.red,
+                  size: 40,
+                ),
+                label: 'More',
+            )
+          ],
         ),
       ),
     );
