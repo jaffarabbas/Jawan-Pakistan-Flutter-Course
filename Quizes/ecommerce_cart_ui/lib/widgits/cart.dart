@@ -1,0 +1,121 @@
+// ignore_for_file: prefer_const_constructors_in_immutables, deprecated_member_use, prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names, must_be_immutable
+
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+class CartTile extends StatefulWidget {
+  Map productInformation;
+  CartTile({Key? key, required this.productInformation}) : super(key: key);
+
+  @override
+  _CartTileState createState() => _CartTileState();
+}
+
+class _CartTileState extends State<CartTile> {
+  List<Widget> RatingStarsList(int rating) {
+    List<Widget> lst = [];
+    for (int i = 0; i < rating; i++) {
+      lst.add(Icon(
+        Icons.star,
+        size: 18,
+      ));
+    }
+    return lst;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 10),
+      child: Stack(
+        overflow: Overflow.visible,
+        children: [
+          Container(
+            width: 350,
+            padding: EdgeInsets.all(20),
+            margin: EdgeInsets.only(top: 10),
+            height: 155,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 3,
+                  blurRadius: 7,
+                  offset: Offset(0, 7), // changes position of shadow
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  children: [
+                    Image.asset(
+                      widget.productInformation["productImage"],
+                      width: 120,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.productInformation["productName"],
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          widget.productInformation["productCategory"],
+                          style: TextStyle(
+                            color: Colors.grey[500],
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                        ),
+                        Row(
+                            children: RatingStarsList(
+                                widget.productInformation["productRating"])),
+                        SizedBox(
+                          height: 7,
+                        ),
+                        Text(
+                          '\$ ${widget.productInformation["productPrice"]}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 26,
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+          Positioned(
+            right: 0,
+            bottom: -19,
+            child: CircleAvatar(
+                radius: 23,
+                backgroundColor: Colors.amber,
+                child: IconButton(
+                  onPressed: () {},
+                  icon: Icon(FontAwesomeIcons.shoppingBag),
+                  iconSize: 24,
+                  color: Colors.black,
+                  padding: EdgeInsets.only(bottom: 3),
+                )),
+          )
+        ],
+      ),
+    );
+  }
+}
