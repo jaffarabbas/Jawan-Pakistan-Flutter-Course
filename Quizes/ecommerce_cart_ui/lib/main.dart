@@ -29,7 +29,7 @@ class _AppState extends State<App> {
           title: Row(
             children: [
               Image.asset(
-                'Images/logo/logo.png',
+                'assets/Images/logo.png',
                 height: 30,
               ),
               SizedBox(
@@ -72,15 +72,15 @@ class _AppState extends State<App> {
           type: BottomNavigationBarType.fixed,
           // fixedColor: Colors.red,
           selectedLabelStyle: TextStyle(
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w600,
           ),
           unselectedLabelStyle: TextStyle(
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w600,
           ),
           selectedItemColor: Colors.red,
           unselectedItemColor: Colors.red,
-          selectedFontSize: 18,
-          unselectedFontSize: 14,
+          selectedFontSize: 12,
+          unselectedFontSize: 12,
           showSelectedLabels: true,
           showUnselectedLabels: true,
           items: [
@@ -88,7 +88,7 @@ class _AppState extends State<App> {
                 icon: Icon(
                   Icons.home_outlined,
                   color: Colors.red,
-                  size: 40,
+                  size: 30,
                 ),
                 label: 'Home',
             ),
@@ -96,7 +96,7 @@ class _AppState extends State<App> {
                 icon: Icon(
                   Icons.grid_on_sharp,
                   color: Colors.red,
-                  size: 40,
+                  size: 30,
                 ),
                 label: 'Catalog',
             ),
@@ -104,7 +104,7 @@ class _AppState extends State<App> {
                 icon: Icon(
                   Icons.shopping_bag_outlined,
                   color: Colors.red,
-                  size: 40,
+                  size: 30,
                 ),
                 label: 'Bag',
             ),
@@ -112,7 +112,7 @@ class _AppState extends State<App> {
                 icon: Icon(
                   Icons.person_outline_rounded,
                   color: Colors.red,
-                  size: 40,
+                  size: 30,
                 ),
                 label: 'Profile',
             ),
@@ -120,7 +120,7 @@ class _AppState extends State<App> {
                 icon: Icon(
                   Icons.more_horiz,
                   color: Colors.red,
-                  size: 40,
+                  size: 30,
                 ),
                 label: 'More',
             )
