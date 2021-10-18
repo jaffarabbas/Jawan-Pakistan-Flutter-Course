@@ -7,10 +7,10 @@ class Datamap {
           "productId": 0,
           "productImage": 'assets/Images/p3.png',
           "productName": 'Men`s\nFuelSell Echo',
-          "productCategory": 'Men`s',
+          "productCategory": 'FeMale`s',
           "productRating": 5,
           "productPrice": 99.99,
-          "isNew": false ,
+          "isNew": false,
           "isExclusive": false,
       },
       1: {
@@ -20,7 +20,7 @@ class Datamap {
           "productCategory": 'Men`s',
           "productRating": 5,
           "productPrice": 129.99,
-          "isNew": false,
+          "isNew": true,
           "isExclusive": false,
       },
       2: {
@@ -31,7 +31,7 @@ class Datamap {
           "productRating": 5,
           "productPrice": 139.99,
           "isNew": false,
-          "isExclusive": false,
+          "isExclusive": true,
       }
     };
   }
