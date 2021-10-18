@@ -26,17 +26,14 @@ class _CartTileState extends State<CartTile> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom:15),
+      margin: EdgeInsets.only(bottom: 15),
       child: Stack(
         overflow: Overflow.visible,
         children: [
-          widget.productInformation['isNew'] ? Container(
-            child: Text('New'),
-          ): Container(),
           Center(
             child: Container(
               width: 320,
-              padding: EdgeInsets.only(left:20),
+              padding: EdgeInsets.only(left: 20),
               margin: EdgeInsets.only(top: 19),
               height: 130,
               decoration: BoxDecoration(
@@ -53,7 +50,39 @@ class _CartTileState extends State<CartTile> {
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: widget.productInformation['isNew'] ? CrossAxisAlignment.start :  CrossAxisAlignment.center,
                 children: [
+                  widget.productInformation['isNew']
+                      ? Container(
+                          height: 20,
+                          width: 40,
+                          padding: EdgeInsets.only(top:4),
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          alignment: Alignment.center,
+                          child: Text('NEW',style:TextStyle(
+                            color: Colors.white,
+                            fontSize: 11
+                          )),
+                        )
+                      : widget.productInformation['isExclusive'] ? Container(
+                          height: 13,
+                          width: 60,
+                          padding: EdgeInsets.only(top:2),
+                          margin: EdgeInsets.only(bottom: 10 , right: 22),
+                          decoration: BoxDecoration(
+                            color: Colors.amber,
+                            borderRadius: BorderRadius.only(topRight: Radius.circular(10)),
+                          ),
+                          alignment: Alignment.center,
+                          child: Text('EXCLUSIVE',style:TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 7
+                          )),
+                      ) : Container(),
                   Row(
                     children: [
                       Image.asset(
