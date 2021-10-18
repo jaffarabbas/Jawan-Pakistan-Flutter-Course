@@ -17,7 +17,7 @@ class _CartTileState extends State<CartTile> {
     for (int i = 0; i < rating; i++) {
       lst.add(Icon(
         Icons.star,
-        size: 18,
+        size: 15,
       ));
     }
     return lst;
@@ -26,90 +26,95 @@ class _CartTileState extends State<CartTile> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
+      margin: EdgeInsets.only(bottom:15),
       child: Stack(
         overflow: Overflow.visible,
         children: [
-          Container(
-            width: 350,
-            padding: EdgeInsets.all(20),
-            margin: EdgeInsets.only(top: 10),
-            height: 155,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 3,
-                  blurRadius: 7,
-                  offset: Offset(0, 7), // changes position of shadow
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    Image.asset(
-                      widget.productInformation["productImage"],
-                      width: 120,
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.productInformation["productName"],
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
+          widget.productInformation['isNew'] ? Container(
+            child: Text('New'),
+          ): Container(),
+          Center(
+            child: Container(
+              width: 320,
+              padding: EdgeInsets.only(left:20),
+              margin: EdgeInsets.only(top: 19),
+              height: 130,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 3,
+                    blurRadius: 7,
+                    offset: Offset(0, 7), // changes position of shadow
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      Image.asset(
+                        widget.productInformation["productImage"],
+                        width: 90,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.productInformation["productName"],
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          widget.productInformation["productCategory"],
-                          style: TextStyle(
-                            color: Colors.grey[500],
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
+                          SizedBox(
+                            height: 13,
                           ),
-                        ),
-                        Row(
-                            children: RatingStarsList(
-                                widget.productInformation["productRating"])),
-                        SizedBox(
-                          height: 7,
-                        ),
-                        Text(
-                          '\$ ${widget.productInformation["productPrice"]}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 26,
+                          Text(
+                            widget.productInformation["productCategory"],
+                            style: TextStyle(
+                              color: Colors.grey[500],
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
                           ),
-                        )
-                      ],
-                    ),
-                  ],
-                )
-              ],
+                          Row(
+                              children: RatingStarsList(
+                                  widget.productInformation["productRating"])),
+                          SizedBox(
+                            height: 7,
+                          ),
+                          Text(
+                            '\$ ${widget.productInformation["productPrice"]}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
           Positioned(
             right: 0,
             bottom: -19,
             child: CircleAvatar(
-                radius: 23,
+                radius: 20,
                 backgroundColor: Colors.amber,
                 child: IconButton(
                   onPressed: () {},
                   icon: Icon(FontAwesomeIcons.shoppingBag),
-                  iconSize: 24,
+                  iconSize: 21,
                   color: Colors.black,
                   padding: EdgeInsets.only(bottom: 3),
                 )),
