@@ -30,11 +30,11 @@ class _HomePageState extends State<HomePage> {
         children: [
           Header(),
           Expanded(
-            child: SizedBox(
-              width: 340,
-              child: CartTileView()
+              child: SizedBox(
+                width: 340,
+                child: CartTileView()
+              ),
             ),
-          )
         ],
       ),
     );
