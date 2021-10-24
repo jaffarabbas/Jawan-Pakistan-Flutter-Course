@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_3/widgits/work_1/eclipse.dart';
 import 'package:flutter_app_3/widgits/work_1/margin_padding.dart';
 import 'package:flutter_app_3/widgits/work_2/images.dart';
+import 'package:flutter_app_3/widgits/work_3/listTile.dart';
 import 'package:superellipse_shape/superellipse_shape.dart';
 
 void main() {
@@ -16,16 +17,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Material(
-        color: Colors.blueAccent[400],
-        // shape: SuperellipseShape(
-        //   borderRadius: BorderRadius.circular(28.0),
-        // ), // SuperellipseShape
-        child: Container(
-          width: 100.0,
-          height: 100.0,
-        ), // Container
-      ),
+      body: AppListView()
+
+      // Material(
+      //   color: Colors.blueAccent[400],
+      //   // shape: SuperellipseShape(
+      //   //   borderRadius: BorderRadius.circular(28.0),
+      //   // ), // SuperellipseShape
+      //   child: Container(
+      //     width: 100.0,
+      //     height: 100.0,
+      //   ), // Container
+      // ),
     );
   }
 }
