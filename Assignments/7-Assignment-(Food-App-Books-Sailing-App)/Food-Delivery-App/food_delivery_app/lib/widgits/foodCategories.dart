@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, file_names, avoid_unnecessary_containers, prefer_const_constructors
+// ignore_for_file: prefer_const_constructors_in_immutables, file_names, avoid_unnecessary_containers, prefer_const_constructors, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/containers/foodCategoryTag.dart';
@@ -23,7 +23,7 @@ class _FoodCategoryState extends State<FoodCategory> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 20),
+      margin: EdgeInsets.only(top: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
