@@ -9,7 +9,7 @@ class FoodCategoryHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 30),
+      margin: EdgeInsets.only(top: 20),
       child: Padding(
         padding: const EdgeInsets.only(left: 35.0,right: 25),
         child: Row(
