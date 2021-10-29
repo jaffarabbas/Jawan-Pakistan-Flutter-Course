@@ -6,6 +6,7 @@ import 'package:food_delivery_app/widgits/cartegoriesHeader.dart';
 import 'package:food_delivery_app/widgits/currentLocation.dart';
 import 'package:food_delivery_app/widgits/favorateProductCollection.dart';
 import 'package:food_delivery_app/widgits/foodCategories.dart';
+import 'package:food_delivery_app/widgits/otherFoodsCollecttion.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.red,
             child: CircleAvatar(
               radius: 14,
-              backgroundImage: AssetImage('Images/admin.jpeg'),
+              backgroundImage: AssetImage('assets/Images/admin.jpeg'),
             ),
           ),
           SizedBox(
@@ -53,8 +54,11 @@ class _HomePageState extends State<HomePage> {
           children: [
             CurrentLocation(locationName: 'Denpasar, IDN'),
             FoodCategory(),
+            SizedBox(height: 10,),
             FoodCategoryHeader(headings: ['Favorite ','Foods']),
-            FavorateAppCollection(foodProductInformation: Datamap.DataSource()["favoriteFoods"][0])
+            FavorateAppCollection(),
+            FoodCategoryHeader(headings: ['Other ','Foods']),
+            OtherFoodCollection(),
           ],
         ),
       ),
