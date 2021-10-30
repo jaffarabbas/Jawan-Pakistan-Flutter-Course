@@ -30,8 +30,6 @@ class _FavoriteProductState extends State<FavoriteProduct> {
           margin: EdgeInsets.only(right: 10),
           padding: EdgeInsets.only(top: 10),
           child: Stack(
-            fit: StackFit.expand,
-            clipBehavior: Clip.antiAliasWithSaveLayer,
             overflow: Overflow.visible,
             children: [
               Positioned(
