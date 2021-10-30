@@ -13,23 +13,18 @@ class FavorateAppCollection extends StatefulWidget {
 }
 
 class _FavorateAppCollectionState extends State<FavorateAppCollection> {
-  List<Widget> FavoriteFoodList() {
-    List<Widget> lst = [];
-    for (Map i in Datamap.DataSource()["favoriteFoods"]) {
-      lst.add(FavoriteProduct(foodProductInformation: i));
-    }
-    return lst;
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 20),
-      height: 180.0,
-      child: ListView(
-        padding: EdgeInsets.only(left: 35),
+    return SizedBox(
+      height: 200,
+      child: ListView.builder(
+        shrinkWrap: true,
+        padding: EdgeInsets.only(top:20,left: 35),
         scrollDirection: Axis.horizontal,
-        children: FavoriteFoodList(),
+        itemCount: Datamap.DataSource()["favoriteFoods"].length,
+        itemBuilder: (context, index) {
+          return FavoriteProduct(foodProductInformation: Datamap.DataSource()["favoriteFoods"][index]);
+        },
       ),
     );
   }
