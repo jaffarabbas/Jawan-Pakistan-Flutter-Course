@@ -3,66 +3,57 @@
 class Datamap {
   static DataSource() {
     return {
-      "category": [
+      "popularBooks": [
         {
-          'flag': true,
-          'itemName': 'All Food',
-          'itemImage': 'assets/Images/roundImg1.png'
+          "name": "Creative Hustle",
+          "price": 100.45,
+          "author": 'Ramen ALbert',
+          "decription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,book. ",
+          "rating": 5,
+          "image": "assets/Images/pic1.png",
         },
         {
-          'flag': false,
-          'itemName': 'Shrimp',
-          'itemImage': 'assets/Images/roundImg1.png'
+          "name": "Art Unleased",
+          "price": 200.45,
+          "author": 'Stefeno Milk',
+          "decription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,book. ",
+          "rating": 5,
+          "image": "assets/Images/pic2.png",
         },
         {
-          'flag': false,
-          'itemName': 'Noodles',
-          'itemImage': 'assets/Images/roundImage2.png'
-        },
-        {
-          'flag': false,
-          'itemName': 'Burger',
-          'itemImage': 'assets/Images/baked-fries.jpg'
-        },
-      ],
-      "favoriteFoods": [
-        {
-          "name": "Orignal Fried Shrimp",
-          "price": 6.9,
-          "image": "assets/Images/roundImg1.png",
-          "description": "With Extra Souse",
-          "rating": 6
-        },
-        {
-          "name": "Spicy Chicken Noodles",
-          "price": 7.9,
-          "image": "assets/Images/roundImage2.png",
-          "description": "With Extra Chicken",
-          "rating": 5
-        },
-        {
-          "name": "Spicy Cheese Pizza",
-          "price": 9.9,
-          "image": "assets/Images/roundImage3.png",
-          "description": "With Extra Cheese",
-          "rating": 6
+          "name": "The 96 Hours",
+          "price": 500.45,
+          "author": 'Robert Blue',
+          "decription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,book. ",
+          "rating": 6,
+          "image": "assets/Images/pic3.png",
         }
       ],
-      "otherFoods":[
+      "bestSeller": [
         {
-          "name": "Chinnese Pizza",
-          "price": 6.9,
-          "image": "assets/Images/pizza.jpg",
-          "description": "With Extra Souse",
-          "rating": 6
+          "name": "The Study of BAB",
+          "price": 1000.45,
+          "author": 'Malbern Rousef',
+          "decription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,book. ",
+          "rating": 4,
+          "image": "assets/Images/pic4.png",
         },
         {
-          "name": "Japanies Sochie",
-          "price": 8.9,
-          "image": "assets/Images/japanese-restaurant.jpg",
-          "description": "With Tuna",
-          "rating": 6
+          "name": "Brand Strategy",
+          "price": 100.45,
+          "author": 'Dean Werner',
+          "decription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,book. ",
+          "rating": 5,
+          "image": "assets/Images/pic5.png",
         },
+        {
+          "name": "Code with me",
+          "price": 300.45,
+          "author": 'Jaffar Abbas',
+          "decription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,book. ",
+          "rating": 6,
+          "image": "assets/Images/pic6.png",
+        }
       ]
     };
   }
