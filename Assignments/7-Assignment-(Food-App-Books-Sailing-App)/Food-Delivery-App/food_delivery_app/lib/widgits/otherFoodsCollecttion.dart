@@ -12,23 +12,18 @@ class OtherFoodCollection extends StatefulWidget {
 }
 
 class _OtherFoodCollectionState extends State<OtherFoodCollection> {
-   List<Widget> OtherFoodList() {
-    List<Widget> lst = [];
-    for (Map i in Datamap.DataSource()["otherFoods"]) {
-      lst.add(OtherFood(foodProductInformation: i));
-    }
-    return lst;
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 25),
-      height: 180.0,
-      child: ListView(
-        padding: EdgeInsets.only(left: 30),
+    return SizedBox(
+      height: 200,
+      child: ListView.builder(
+        shrinkWrap: true,
+        padding: EdgeInsets.only(top:20,left: 35),
         scrollDirection: Axis.horizontal,
-        children: OtherFoodList(),
+        itemCount: Datamap.DataSource()["otherFoods"].length,
+        itemBuilder: (context, index) {
+          return OtherFood(foodProductInformation: Datamap.DataSource()["otherFoods"][index]);
+        },
       ),
     );
   }
