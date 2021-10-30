@@ -31,8 +31,6 @@ class _OtherFoodState extends State<OtherFood> {
       width: 150,
       child: Center(
         child: Stack(
-          fit: StackFit.expand,
-          clipBehavior: Clip.antiAliasWithSaveLayer,
           overflow: Overflow.visible,
           children: [
             Positioned(
