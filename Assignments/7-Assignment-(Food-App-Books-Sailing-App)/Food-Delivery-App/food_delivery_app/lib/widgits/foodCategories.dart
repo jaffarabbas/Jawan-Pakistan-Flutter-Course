@@ -12,14 +12,6 @@ class FoodCategory extends StatefulWidget {
 }
 
 class _FoodCategoryState extends State<FoodCategory> {
-  List<Widget> FoodTagList() {
-    List<Widget> lst = [];
-    for (Map i in Datamap.DataSource()["category"]) {
-      lst.add(FoodCategoryTag(itemInformation: i));
-    }
-    return lst;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,16 +42,29 @@ class _FoodCategoryState extends State<FoodCategory> {
               ),
             ),
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 35.0),
-              child: Row(
-                children: FoodTagList(),
-              ),
-            ),
-          ),
+          FoodTagList(),
         ],
+      ),
+    );
+  }
+}
+
+class FoodTagList extends StatelessWidget {
+  const FoodTagList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 70,
+      child: ListView.builder(
+        shrinkWrap: true,
+        padding: EdgeInsets.only(top: 20, left: 35),
+        scrollDirection: Axis.horizontal,
+        itemCount: Datamap.DataSource()["category"].length,
+        itemBuilder: (context, index) {
+          return FoodCategoryTag(
+              itemInformation: Datamap.DataSource()["category"][index]);
+        },
       ),
     );
   }
