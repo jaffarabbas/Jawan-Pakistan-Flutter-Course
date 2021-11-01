@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_delivery_app/dataSource/datamap.dart';
 import 'package:food_delivery_app/widgits/cartegoriesHeader.dart';
 import 'package:food_delivery_app/widgits/currentLocation.dart';
@@ -16,6 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int currentBottomNavigationIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,20 +52,72 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SingleChildScrollView(
         child: Column(
-        //  mainAxisSize: MainAxisSize.min,
+          //  mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CurrentLocation(locationName: 'Denpasar, IDN'),
             FoodCategory(),
-            SizedBox(height: 10,),
-            FoodCategoryHeader(headings: ['Favorite ','Foods']),
+            SizedBox(
+              height: 10,
+            ),
+            FoodCategoryHeader(headings: ['Favorite ', 'Foods']),
             FavorateAppCollection(),
-            FoodCategoryHeader(headings: ['Other ','Foods']),
+            FoodCategoryHeader(headings: ['Other ', 'Foods']),
             OtherFoodCollection(),
           ],
         ),
       ),
       drawer: Drawer(),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (index) => setState(() => currentBottomNavigationIndex = index),
+        currentIndex: currentBottomNavigationIndex,
+        type: BottomNavigationBarType.fixed,
+        // fixedColor: Colors.red,
+        selectedLabelStyle: TextStyle(
+          fontWeight: FontWeight.w600,
+        ),
+        unselectedLabelStyle: TextStyle(
+          fontWeight: FontWeight.w600,
+        ),
+        // selectedItemColor: Colors.red,
+        // unselectedItemColor: Colors.red,
+        selectedIconTheme: IconThemeData(color: Colors.red),
+        unselectedIconTheme: IconThemeData(color: Colors.grey[400]),
+        selectedFontSize: 12,
+        unselectedFontSize: 12,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              FontAwesomeIcons.solidCompass,
+              size: 20,
+            ),
+            label: 'search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              FontAwesomeIcons.solidBookmark,
+              size: 20,
+            ),
+            label: 'bookmark',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              FontAwesomeIcons.history,
+              size: 20,
+            ),
+            label: 'history',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.notifications_active_sharp,
+              size: 25,
+            ),
+            label: 'notification',
+          ),
+        ],
+      ),
     );
   }
 }
