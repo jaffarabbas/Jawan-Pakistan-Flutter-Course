@@ -30,21 +30,24 @@ class Datamap {
           "name": "Orignal Fried Shrimp",
           "price": 6.9,
           "image": "assets/Images/roundImg1.png",
-          "description": "With Extra Souse",
+          "extras": "With Extra Souse",
+          "decription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,book. ",
           "rating": 6
         },
         {
           "name": "Spicy Chicken Noodles",
           "price": 7.9,
           "image": "assets/Images/roundImage2.png",
-          "description": "With Extra Chicken",
+          "extras": "With Extra Chicken",
+          "decription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,book. ",
           "rating": 5
         },
         {
           "name": "Spicy Cheese Pizza",
           "price": 9.9,
           "image": "assets/Images/roundImage3.png",
-          "description": "With Extra Cheese",
+          "extras": "With Extra Cheese",
+          "decription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,book. ",
           "rating": 6
         }
       ],
@@ -53,14 +56,16 @@ class Datamap {
           "name": "Chinnese Pizza",
           "price": 6.9,
           "image": "assets/Images/pizza.jpg",
-          "description": "With Extra Souse",
+          "extras": "With Extra Souse",
+          "decription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,book. ",
           "rating": 6
         },
         {
           "name": "Japanies Sochie",
           "price": 8.9,
           "image": "assets/Images/japanese-restaurant.jpg",
-          "description": "With Tuna",
+          "extras": "With Tuna",
+          "decription": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,book. ",
           "rating": 6
         },
       ]
