@@ -56,7 +56,7 @@ class _FavoriteProductState extends State<FavoriteProduct> {
                         ),
                       ),
                       Text(
-                        '${widget.foodProductInformation["description"]}',
+                        '${widget.foodProductInformation["extras"]}',
                         style: TextStyle(
                             color: Colors.white54,
                             fontWeight: FontWeight.w300,
