@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_4/work_1/expanded.dart';
 import 'package:flutter_app_4/work_1/home.dart';
+import 'package:flutter_app_4/work_2/media_query_2.dart';
 import 'package:flutter_app_4/work_2/mediaquery.dart';
 import 'package:flutter_app_4/work_2/multiplewidgitswithexpaneded.dart';
 
@@ -21,7 +22,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
     return MaterialApp(
-      home: MediaQueryCheck(),
+      home: MediaQueryCheck2(),
     );
   }
 }
