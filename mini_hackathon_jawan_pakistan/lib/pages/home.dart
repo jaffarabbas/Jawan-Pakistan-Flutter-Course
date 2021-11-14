@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   Widget CartTileView() {
     return ListView.builder(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      // physics: NeverScrollableScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemCount: Datamap.DataSource()["slider"].length,
         itemBuilder: (context, index) {
@@ -29,14 +29,19 @@ class _HomePageState extends State<HomePage> {
   }
   Widget ItemTileView() {
     return ListView.builder(
-      physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
+      // physics: NeverScrollableScrollPhysics(),
         itemCount: Datamap.DataSource().length,
         itemBuilder: (context, index) {
           return ItemCard(productInformation: Datamap.DataSource()["items"][index]);
         });
   }
 
+  void AddToCart(){
+    setState(() {
+      
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +81,9 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           children: [
-            Expanded(child: CartTileView()),
+            Container(
+              height: 250,
+              child: CartTileView()),
             Expanded(
               child: ItemTileView(),
             ),
