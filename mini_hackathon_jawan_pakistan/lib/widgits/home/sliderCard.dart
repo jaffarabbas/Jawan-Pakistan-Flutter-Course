@@ -15,8 +15,8 @@ class _SLiderCardState extends State<SLiderCard> {
   Widget build(BuildContext context) {
     var FontAwesomeIcons;
     return Container(
-      padding: EdgeInsets.all(30),
-      margin: EdgeInsets.only(bottom: 15),
+      padding: EdgeInsets.all(20),
+      margin: EdgeInsets.only(bottom: 5),
       child: Stack(
         overflow: Overflow.visible,
         children: [
