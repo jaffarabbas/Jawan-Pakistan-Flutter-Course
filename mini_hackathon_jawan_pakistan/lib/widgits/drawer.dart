@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mini_hackathon_jawan_pakistan/pages/about.dart';
 import 'package:mini_hackathon_jawan_pakistan/widgits/theme.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -62,15 +63,23 @@ class AppDrawer extends StatelessWidget {
               style: TextStyle(color: Colors.deepPurple),
             ),
           ),
-          ListTile(
-            leading: Icon(
-              CupertinoIcons.info_circle,
-              color: Colors.deepPurple,
-            ),
-            title: Text(
-              "About",
-              textScaleFactor: 1.2,
-              style: TextStyle(color: Colors.deepPurple),
+          InkWell(
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => AboutPage()),
+              );
+            },
+            child: ListTile(
+              leading: Icon(
+                CupertinoIcons.info_circle,
+                color: Colors.deepPurple,
+              ),
+              title: Text(
+                "About",
+                textScaleFactor: 1.2,
+                style: TextStyle(color: Colors.deepPurple),
+              ),
             ),
           ),
         ],
