@@ -1,6 +1,9 @@
-// ignore_for_file: override_on_non_overriding_member, file_names
+// ignore_for_file: override_on_non_overriding_member, file_names, prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:mini_hackathon_jawan_pakistan/pages/home.dart';
+import 'package:mini_hackathon_jawan_pakistan/pages/profile.dart';
+import 'package:mini_hackathon_jawan_pakistan/pages/search.dart';
 import 'package:mini_hackathon_jawan_pakistan/widgits/theme.dart';
 
 class BootomNavigate extends StatefulWidget {
@@ -12,6 +15,11 @@ class BootomNavigate extends StatefulWidget {
 
 class _BootomNavigateState extends State<BootomNavigate> {
   int currentBottomNavigationIndex = 0;
+  final tabs = [
+    HomePage(),
+    SearchPage(),
+    ProfilePage(),
+  ];
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
