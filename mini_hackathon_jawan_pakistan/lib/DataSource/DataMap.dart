@@ -6,25 +6,25 @@ class Datamap {
       "slider": [
         {
           "productId": 0,
-          "productImage": 'images/p1.png',
+          "productImage": 'assets/images/p1.png',
           "productName": 'Shoes',
           "productCount": 4,
         },
         {
           "productId": 1,
-          "productImage": 'images/xt3.png',
+          "productImage": 'assets/images/xt3.png',
           "productName": 'T-Shirt',
           "productCount": 4,
         },
         {
           "prodctId": 2,
-          "productImage": 'images/j2.png',
+          "productImage": 'assets/images/j2.png',
           "productName": 'Jeans',
           "productCount": 4,
         },
         {
           "productId": 4,
-          "productImage": 'images/s3.png',
+          "productImage": 'assets/images/s3.png',
           "productName": 'Suots',
           "productCount": 4,
         },
@@ -32,31 +32,44 @@ class Datamap {
       "items": [
         {
           "productId": 0,
-          "productImage": 'images/p1.png',
+          "productImage": 'assets/images/p1.png',
           "productName": 'Men`s\nFuelSell Echo',
           "productPrice": 99.99,
-          "isNew": false,
+          "description": "",
+          "isFavourite": false,
+          "isInCart": false,
         },
         {
           "productId": 1,
-          "productImage": 'images/p2.png',
+          "productImage": 'assets/images/p2.png',
           "productName": 'Men`s FuelSell\nRebel',
-          "description":"",
+          "description": "",
           "productPrice": 129.99,
-          "isNew": true,
+          "isFavourite": false,
+          "isInCart": false,
         },
         {
           "productId": 2,
-          "productImage": 'images/p3.png',
+          "productImage": 'assets/images/p3.png',
           "productName": 'Side blocks\n1200',
-          "description":"",
+          "description": "",
           "productPrice": 139.99,
-          "isNew": false,
-          "isExclusive": true,
-        }
+          "isFavourite": false,
+          "isInCart": false,
+        },
+        {
+          "productId": 3,
+          "productImage": 'assets/images/p4.png',
+          "productName": 'Side blocks\n1200',
+          "description": "",
+          "productPrice": 139.99,
+          "isFavourite": false,
+          "isInCart": false,
+        }, 
       ],
-      "cartList":[],
-      "favourate":[]
+      "cartList": [],
+      "favourate": [],
+      "cartCount": 0,
     };
   }
 }
