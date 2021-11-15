@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:mini_hackathon_jawan_pakistan/containers/_textFeild.dart';
 import 'package:mini_hackathon_jawan_pakistan/pages/home.dart';
+import 'package:mini_hackathon_jawan_pakistan/widgits/theme.dart';
 
 void main() => runApp(LoginPage());
 
@@ -12,9 +13,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool stateOfContainer = false;
   @override
   Widget build(BuildContext context) {
-    bool stateOfContainer = false;
     final _formKey = GlobalKey<FormState>();
     
     
@@ -39,11 +40,11 @@ class _LoginPageState extends State<LoginPage> {
         child: Stack(
           overflow: Overflow.visible,
           children: [
-            Image.asset("images/layout/bg.png"),
+            Image.asset("assets/images/layout/bg.png",fit:BoxFit.fill,),
             Positioned(
-              top: 20,
-              right: 40,
-              child: Image.asset("images/layout/logo_w.png"),
+              top: 30,
+              right: 50,
+              child: Image.asset("assets/images/layout/logo_w.png",width:90),
             ),
             Center(
               child: Form(
@@ -64,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                       Material(
                         color: stateOfContainer
                             ? Colors.green[300]
-                            : Colors.deepPurple,
+                            : AppTheme.primarybackground,
                         borderRadius: BorderRadius.circular(
                           stateOfContainer ? 80 : 12,
                         ),
@@ -73,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: AnimatedContainer(
                             duration: Duration(seconds: 1),
                             height: 50,
-                            width: stateOfContainer ? 50 : 150,
+                            width: stateOfContainer ? 50 : 200,
                             alignment: Alignment.center,
                             child: stateOfContainer
                                 ? Icon(
