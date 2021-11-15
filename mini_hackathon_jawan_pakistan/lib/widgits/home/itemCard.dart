@@ -1,12 +1,22 @@
 // ignore_for_file: file_names, deprecated_member_use, must_be_immutable, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:mini_hackathon_jawan_pakistan/DataSource/CartList.dart';
 import 'package:mini_hackathon_jawan_pakistan/DataSource/DataMap.dart';
+import 'package:mini_hackathon_jawan_pakistan/DataSource/FavouriteList.dart';
 import 'package:mini_hackathon_jawan_pakistan/widgits/theme.dart';
 
 class ItemCard extends StatefulWidget {
+  // Function addCounterBar;
   Map productInformation;
-  ItemCard({Key? key, required this.productInformation}) : super(key: key);
+  Function Refresh;
+  Function DeleteCart;
+  ItemCard(
+      {Key? key,
+      required this.productInformation,
+      required this.Refresh,
+      required this.DeleteCart})
+      : super(key: key);
 
   @override
   _ItemCardState createState() => _ItemCardState();
@@ -15,15 +25,56 @@ class ItemCard extends StatefulWidget {
 class _ItemCardState extends State<ItemCard> {
   @override
   Widget build(BuildContext context) {
+    int idOfCartItem;
+    bool checkFavorite = widget.productInformation["isFavourite"];
+    @override
+    void initState() {
+      super.initState();
+      checkFavorite = widget.productInformation["isFavourite"];
+      print("after : ${checkFavorite}");
+    }
 
-    void AddToCart(){
+    void AddToCart() {
       setState(() {
-        Map<dynamic, dynamic> item = widget.productInformation;
+        // widget.addCounterBar();
+        CartList.cart.add(widget.productInformation);
+        widget.productInformation["isInCart"] = true;
         print(widget.productInformation);
-        Datamap.DataSource()["cartList" as List<dynamic>][Datamap.DataSource()["cartList"].length].add(item);
-        print(Datamap.DataSource()["cartList"]);
+        widget.Refresh();
       });
-    } 
+    }
+
+    void DeleteFromCart(int index) {
+      setState(() {
+        print("delete");
+        CartList.cart.removeAt(index);
+        CartList.cartCount = CartList.cart.length;
+      });
+    }
+
+    void DeleteFromFavorites(int index) {
+      setState(() {
+        print("delete");
+        FavouriteList.favourite.removeAt(index);
+      });
+    }
+
+    void addToFavouriteList() {
+      setState(() {
+        if (widget.productInformation["isFavourite"] == false) {
+          widget.productInformation["isFavourite"] = true;
+        } else {
+          widget.productInformation["isFavourite"] = false;
+        }
+        if (widget.productInformation["isFavourite"] == true) {
+          FavouriteList.favourite.add(widget.productInformation);
+        } else {
+          FavouriteList.favourite
+              .removeWhere((element) => element["isFavourite"] == false);
+        }
+      });
+      print(FavouriteList.favourite);
+    }
 
     return Container(
       margin: EdgeInsets.only(bottom: 15),
@@ -62,29 +113,50 @@ class _ItemCardState extends State<ItemCard> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.favorite,
-                                color: AppTheme.primarybackground,
-                              ),
-                            ),
-                            IconButton(
                               onPressed: () {
-                                AddToCart();
+                                addToFavouriteList();
+                                checkFavorite =
+                                    widget.productInformation["isFavourite"];
+                                print("after : ${checkFavorite}");
                               },
                               icon: Icon(
-                                Icons.shopping_cart_rounded,
+                                checkFavorite
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
                                 color: AppTheme.primarybackground,
                               ),
                             ),
+                            widget.productInformation["isInCart"]
+                                ? IconButton(
+                                    onPressed: () {
+                                      DeleteFromCart(widget.DeleteCart());
+                                      widget.Refresh();
+                                    },
+                                    icon: Icon(
+                                      Icons.delete,
+                                      color: AppTheme.primarybackground,
+                                    ),
+                                  )
+                                : IconButton(
+                                    onPressed: () {
+                                      AddToCart();
+                                    },
+                                    icon: Icon(
+                                      Icons.shopping_cart_rounded,
+                                      color: AppTheme.primarybackground,
+                                    ),
+                                  ),
                           ],
                         ),
                         SizedBox(
                           height: 30,
                         ),
-                        Image.asset(
-                          widget.productInformation["productImage"],
-                          width: 180,
+                        Container(
+                          padding: EdgeInsets.all(20),
+                          child: Image.asset(
+                            widget.productInformation["productImage"],
+                            width: 180
+                          ),
                         ),
                         SizedBox(
                           height: 20,
