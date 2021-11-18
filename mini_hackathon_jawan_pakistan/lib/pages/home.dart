@@ -6,6 +6,7 @@ import 'package:mini_hackathon_jawan_pakistan/DataSource/CartList.dart';
 import 'package:mini_hackathon_jawan_pakistan/DataSource/DataMap.dart';
 import 'package:mini_hackathon_jawan_pakistan/DataSource/FavouriteList.dart';
 import 'package:mini_hackathon_jawan_pakistan/pages/cart.dart';
+import 'package:mini_hackathon_jawan_pakistan/pages/dashboard.dart';
 import 'package:mini_hackathon_jawan_pakistan/pages/favourite.dart';
 import 'package:mini_hackathon_jawan_pakistan/pages/profile.dart';
 import 'package:mini_hackathon_jawan_pakistan/pages/search.dart';
@@ -25,42 +26,23 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int currentBottomNavigationIndex = 0;
   int counterBar = 0;
-  final tabs = [
-    HomePage(),
-    SearchPage(),
-    ProfilePage(),
-  ];
-
-  Widget CartTileView() {
-    return ListView.builder(
-        shrinkWrap: true,
-        // physics: NeverScrollableScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        itemCount: Datamap.DataSource()["slider"].length,
-        itemBuilder: (context, index) {
-          return SLiderCard(
-              productInformation: Datamap.DataSource()["slider"][index]);
-        });
-  }
-
-  Widget ItemTileView() {
-    return ListView.builder(
-        shrinkWrap: true,
-        // physics: NeverScrollableScrollPhysics(),
-        itemCount: Datamap.DataSource()["items"].length,
-        itemBuilder: (context, index) {
-          return ItemCard(
-              DeleteCart: () {},
-              Refresh: refreashCount,
-              productInformation: Datamap.DataSource()["items"][index]);
-        });
-  }
-
-  void refreashCount() {
+  var tabs = [];
+  void RefreashCount() {
     setState(() {
       CartList.cartCount = CartList.cart.length;
       print(CartList.cartCount);
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    tabs = <Widget>[
+    Dashboard(refresh: RefreashCount,),
+    SearchPage(),
+    ProfilePage(),
+  ];
   }
 
   @override
@@ -133,16 +115,7 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Container(height: 250, child: CartTileView()),
-            Expanded(
-              child: ItemTileView(),
-            ),
-          ],
-        ),
-      ),
+      body: tabs[currentBottomNavigationIndex],
       drawer: AppDrawer(),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) => setState(() => currentBottomNavigationIndex = index),
@@ -177,7 +150,7 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.shopping_bag_rounded,
+              Icons.person_outline_rounded,
               size: 20,
             ),
             label: 'profile',
