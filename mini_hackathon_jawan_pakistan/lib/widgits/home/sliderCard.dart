@@ -13,7 +13,6 @@ class SLiderCard extends StatefulWidget {
 class _SLiderCardState extends State<SLiderCard> {
   @override
   Widget build(BuildContext context) {
-    var FontAwesomeIcons;
     return Container(
       padding: EdgeInsets.all(20),
       margin: EdgeInsets.only(bottom: 5),
