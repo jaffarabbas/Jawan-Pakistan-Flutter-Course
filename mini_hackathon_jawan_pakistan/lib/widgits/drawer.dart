@@ -3,6 +3,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_hackathon_jawan_pakistan/pages/about.dart';
+import 'package:mini_hackathon_jawan_pakistan/pages/cart.dart';
+import 'package:mini_hackathon_jawan_pakistan/pages/favourite.dart';
+import 'package:mini_hackathon_jawan_pakistan/pages/login.dart';
 import 'package:mini_hackathon_jawan_pakistan/widgits/theme.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -30,42 +33,66 @@ class AppDrawer extends StatelessWidget {
               accountEmail: Text("gamaportal8@gmail.com"),
             ),
           ),
-          ListTile(
-            leading: Icon(
-              Icons.logout,
-              color: Colors.deepPurple,
-            ),
-            title: Text(
-              "Logout",
-              textScaleFactor: 1.2,
-              style: TextStyle(color: Colors.deepPurple),
-            ),
-          ),
-          ListTile(
-            leading: Icon(
-              CupertinoIcons.cart,
-              color: Colors.deepPurple,
-            ),
-            title: Text(
-              "Cart",
-              textScaleFactor: 1.2,
-              style: TextStyle(color: Colors.deepPurple),
+          InkWell(
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()),
+              );
+            },
+            child: ListTile(
+              leading: Icon(
+                Icons.logout,
+                color: Colors.deepPurple,
+              ),
+              title: Text(
+                "Logout",
+                textScaleFactor: 1.2,
+                style: TextStyle(color: Colors.deepPurple),
+              ),
             ),
           ),
-          ListTile(
-            leading: Icon(
-              Icons.favorite,
-              color: Colors.deepPurple,
-            ),
-            title: Text(
-              "Favourite",
-              textScaleFactor: 1.2,
-              style: TextStyle(color: Colors.deepPurple),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CartPage()),
+              );
+            },
+            child: ListTile(
+              leading: Icon(
+                CupertinoIcons.cart,
+                color: Colors.deepPurple,
+              ),
+              title: Text(
+                "Cart",
+                textScaleFactor: 1.2,
+                style: TextStyle(color: Colors.deepPurple),
+              ),
             ),
           ),
           InkWell(
             onTap: () {
               Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => Favouritepage()),
+              );
+            },
+            child: ListTile(
+              leading: Icon(
+                Icons.favorite,
+                color: Colors.deepPurple,
+              ),
+              title: Text(
+                "Favourite",
+                textScaleFactor: 1.2,
+                style: TextStyle(color: Colors.deepPurple),
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => AboutPage()),
               );
