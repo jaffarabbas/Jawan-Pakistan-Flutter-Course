@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mini_hackathon_jawan_pakistan/DataSource/CartList.dart';
 import 'package:mini_hackathon_jawan_pakistan/DataSource/DataMap.dart';
 import 'package:mini_hackathon_jawan_pakistan/DataSource/FavouriteList.dart';
+import 'package:mini_hackathon_jawan_pakistan/pages/detials.dart';
 import 'package:mini_hackathon_jawan_pakistan/widgits/theme.dart';
 
 class ItemCard extends StatefulWidget {
@@ -11,11 +12,15 @@ class ItemCard extends StatefulWidget {
   Map productInformation;
   Function Refresh;
   Function DeleteCart;
+  Function DeleteFavourate;
+  bool isFavouritePage;
   ItemCard(
       {Key? key,
       required this.productInformation,
       required this.Refresh,
-      required this.DeleteCart})
+      required this.DeleteCart,
+      required this.DeleteFavourate,
+      required this.isFavouritePage})
       : super(key: key);
 
   @override
@@ -79,119 +84,147 @@ class _ItemCardState extends State<ItemCard> {
     return Container(
       margin: EdgeInsets.only(bottom: 15),
       alignment: Alignment.center,
-      child: Stack(
-        overflow: Overflow.visible,
-        children: [
-          Center(
-            child: Container(
-              width: 280,
-              alignment: Alignment.center,
-              margin: EdgeInsets.only(top: 10),
-              height: 290,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 3,
-                    blurRadius: 7,
-                    offset: Offset(0, 7), // changes position of shadow
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                addToFavouriteList();
-                                checkFavorite =
-                                    widget.productInformation["isFavourite"];
-                                print("after : ${checkFavorite}");
-                              },
-                              icon: Icon(
-                                checkFavorite
-                                    ? Icons.favorite
-                                    : Icons.favorite_border,
-                                color: AppTheme.primarybackground,
-                              ),
-                            ),
-                            widget.productInformation["isInCart"]
-                                ? IconButton(
-                                    onPressed: () {
-                                      DeleteFromCart(widget.DeleteCart());
-                                      widget.Refresh();
-                                    },
-                                    icon: Icon(
-                                      Icons.delete,
-                                      color: AppTheme.primarybackground,
-                                    ),
-                                  )
-                                : IconButton(
-                                    onPressed: () {
-                                      AddToCart();
-                                    },
-                                    icon: Icon(
-                                      Icons.shopping_cart_rounded,
-                                      color: AppTheme.primarybackground,
-                                    ),
-                                  ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(20),
-                          child: Image.asset(
-                            widget.productInformation["productImage"],
-                            width: 180
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              widget.productInformation["productName"],
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 13,
-                            ),
-                            Text(
-                              '\$ ${widget.productInformation["productPrice"]}',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
+      child: InkWell(
+        focusColor: Colors.white,
+        hoverColor: Colors.white,
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    ItemDetials(productInformation: widget.productInformation)),
+          );
+        },
+        child: Stack(
+          overflow: Overflow.visible,
+          children: [
+            Center(
+              child: Container(
+                width: 280,
+                alignment: Alignment.center,
+                margin: EdgeInsets.only(top: 10),
+                height: 290,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      spreadRadius: 3,
+                      blurRadius: 7,
+                      offset: Offset(0, 7), // changes position of shadow
                     ),
-                  )
-                ],
+                  ],
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              widget.isFavouritePage
+                                  ? !widget.productInformation["isFavourite"]
+                                      ? IconButton(
+                                          onPressed: () {
+                                            addToFavouriteList();
+                                            checkFavorite =
+                                                widget.productInformation[
+                                                    "isFavourite"];
+                                            print("after : ${checkFavorite}");
+                                          },
+                                          icon: Icon(
+                                            checkFavorite
+                                                ? Icons.favorite
+                                                : Icons.favorite_border,
+                                            color: AppTheme.primarybackground,
+                                          ),
+                                        )
+                                      : IconButton(
+                                          onPressed: () {
+                                            DeleteFromFavorites(
+                                                widget.DeleteFavourate());
+                                            widget.Refresh();
+                                          },
+                                          icon: Icon(
+                                            Icons.delete,
+                                            color: AppTheme.primarybackground,
+                                          ),
+                                        )
+                                  : IconButton(
+                                      onPressed: () {
+                                        addToFavouriteList();
+                                        checkFavorite = widget
+                                            .productInformation["isFavourite"];
+                                        print("after : ${checkFavorite}");
+                                      },
+                                      icon: Icon(
+                                        checkFavorite
+                                            ? Icons.favorite
+                                            : Icons.favorite_border,
+                                        color: AppTheme.primarybackground,
+                                      ),
+                                    ),
+                              IconButton(
+                                onPressed: () {
+                                  AddToCart();
+                                },
+                                icon: Icon(
+                                  Icons.shopping_cart_rounded,
+                                  color: AppTheme.primarybackground,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(20),
+                            child: Image.asset(
+                                widget.productInformation["productImage"],
+                                width: 180),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                widget.productInformation["productName"],
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 13,
+                              ),
+                              Text(
+                                '\$ ${widget.productInformation["productPrice"]}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
