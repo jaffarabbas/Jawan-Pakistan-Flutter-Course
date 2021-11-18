@@ -39,7 +39,9 @@ class _FavouritepageState extends State<Favouritepage> {
         itemCount: FavouriteList.favourite.length,
         itemBuilder: (context, index) {
           return ItemCard(
+              isFavouritePage: true,
               DeleteCart: () => IndexSeter(index),
+              DeleteFavourate: () => IndexSeter(index),
               Refresh: refreashCount,
               productInformation: FavouriteList.favourite[index]);
         });
