@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mini_hackathon_jawan_pakistan/DataSource/CartList.dart';
 import 'package:mini_hackathon_jawan_pakistan/DataSource/DataMap.dart';
 import 'package:mini_hackathon_jawan_pakistan/pages/home.dart';
+import 'package:mini_hackathon_jawan_pakistan/widgits/cart/cartItem.dart';
 import 'package:mini_hackathon_jawan_pakistan/widgits/home/itemCard.dart';
 import 'package:mini_hackathon_jawan_pakistan/widgits/theme.dart';
 
@@ -37,8 +38,10 @@ class _CartPageState extends State<CartPage> {
         // physics: NeverScrollableScrollPhysics(),
         itemCount: CartList.cart.length,
         itemBuilder: (context, index) {
-          return ItemCard(
+          return CartItem(
+              isFavouritePage: false,
               DeleteCart: () => IndexSeter(index),
+              DeleteFavourate: (){},
               Refresh: refreashCount,
               productInformation: CartList.cart[index]);
         });
