@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         fontFamily: GoogleFonts.poppins().fontFamily,
       ),
       title: 'JZ Shoppers',
-      home: HomePage(),
+      home: SplashScreen(),
     );
   }
 }
