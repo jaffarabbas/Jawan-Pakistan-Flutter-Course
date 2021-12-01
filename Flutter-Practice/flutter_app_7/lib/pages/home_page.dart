@@ -1,9 +1,11 @@
-// ignore_for_file: unnecessary_new, curly_braces_in_flow_control_structures
+// ignore_for_file: unnecessary_new, curly_braces_in_flow_control_structures, prefer_const_constructors
 
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app_7/models/User.dart';
+import 'package:flutter_app_7/services/fetchApi.dart';
+import 'package:flutter_app_7/widgits/userList.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
@@ -15,35 +17,31 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   getUser() async {
-    var userList = [];
-    var responce =
-        await http.get(Uri.http("jsonplaceholder.typicode.com", "users"));
-    var jsonCode = jsonDecode(responce.body);
-    for (var i in jsonCode) {
-      User u = new User(i["name"], i["email"]);
-      userList.add(u);
-    }
+    ApiService _apiServices = new ApiService();
+    List<Users> dataSource = await _apiServices.fetchData();
+    return dataSource;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Api Fetching'),
+      ),
       body: FutureBuilder(
         future: getUser(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasError) {
-            return Text('${snapshot.error}');
-          } else {
-            return ListView.builder(
-              itemCount: snapshot.data.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text("${snapshot.data![index].name}"),
-                  subtitle: Text("${snapshot.data![index].email}"),
-                );
-              },
+          if (snapshot.hasData) {
+            return UserList(
+                itemCount: snapshot.data.length,
+                snapshot: snapshot.data,
             );
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
           }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
     );
