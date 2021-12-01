@@ -9,7 +9,8 @@ import 'package:flutter_app_7/widgits/userList.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  bool state;
+  HomePage({Key? key,required this.state}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -18,7 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   getUser() async {
     ApiService _apiServices = new ApiService();
-    List<Users> dataSource = await _apiServices.fetchData();
+    List<Users> dataSource = await _apiServices.fetchData(widget.state);
     return dataSource;
   }
 
