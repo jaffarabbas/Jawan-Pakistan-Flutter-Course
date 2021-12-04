@@ -9,7 +9,7 @@ class WeatherModel {
   // late num sunset;
   late String main;
   // late String description;
-  // late String icon;
+  late String icon;
   late num temp;
   // late num feels_like;
   // late num temp_min;
@@ -31,7 +31,7 @@ class WeatherModel {
     // required this.sunset,
     required this.main,
     // required this.description,
-    // required this.icon,
+    required this.icon,
     required this.temp,
     // required this.feels_like,
     // required this.temp_min,
@@ -54,7 +54,7 @@ class WeatherModel {
     // sunset = map['sunset'];
     main = map['weather'][0]['main'];
     // description = map['description'];
-    // icon = map['icon'];
+    icon = map['weather'][0]['icon'];
     temp = map['main']['temp'];
     // feels_like = map['feels_like'];
     // temp_min = map['temp_min'];
