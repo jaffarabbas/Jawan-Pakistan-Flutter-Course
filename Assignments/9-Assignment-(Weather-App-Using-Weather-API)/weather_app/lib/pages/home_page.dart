@@ -8,16 +8,29 @@ import 'package:weather_app/widgits/themes.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  String cityName;
+  HomePage({Key? key, required this.cityName}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  TextEditingController controller = new TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // cityName = controller.value.text;
+    getUser();
+  }
+
   getUser() async {
+    // print('as : $cityName');
     ApiService _apiServices = new ApiService();
-    List<WeatherModel> dataSource = await _apiServices.fetchData('karachi');
+    List<WeatherModel> dataSource =
+        await _apiServices.fetchData(widget.cityName);
     return dataSource;
   }
 
@@ -25,20 +38,81 @@ class _HomePageState extends State<HomePage> {
   num SetDecimal(num value) {
     return double.parse(((value).toStringAsFixed(2)));
   }
+
   //kelvin to celcius
-  num KelvinToCelcius(num temperature){
+  num KelvinToCelcius(num temperature) {
     return SetDecimal(temperature - 273.15);
   }
+
   //current date
-  String CurrentDate(){
-    var monthLst = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    var weekList = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  String CurrentDate() {
+    var monthLst = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
+    var weekList = [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday'
+    ];
     DateTime now = new DateTime.now();
     DateTime date = new DateTime(now.year, now.month, now.day);
     String day = weekList.elementAt(date.weekday - 1);
     String month = monthLst.elementAt(date.month - 1);
     return ("$day ${date.day} $month");
   }
+
+  String ImageSelection(String weather){
+    if(weather == "50n" || weather == "50d"){
+      return "Images/fogh.png";
+    }else if(weather == "01d"){
+      return "Images/sunny.png";
+    }else if(weather == "01n"){
+      return "Images/night.png";
+    }else if(weather == "02d" || weather == "02n"){
+      return "Images/cloud.png";
+    }else if(weather == "04d"){
+      return "Images/cloudySunny.png";
+    }else if(weather == "04n"){
+      return "Images/nightCloudy.png";
+    }else if(weather == "09d"){
+      return "Images/sunyRaniyCloudy.png";
+    }else if(weather == "09n"){
+      return "Images/nightHeavyRain.png";
+    }else if(weather == "10d" || weather == "10n"){
+      return "Images/rainy.png";
+    }else if(weather == "11d" || weather == "11n"){
+      return "Images/thunder.png";
+    }else if(weather == "13d" || weather == "13n"){
+      return "Images/cold.png";
+    }
+    return "";
+  }
+
+  void ChangeCity() {
+    setState(() {
+      String cityName = controller.value.text;
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage(cityName: cityName)),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,7 +170,7 @@ class _HomePageState extends State<HomePage> {
                             child: Container(
                               height: Resposive.ResposiveHeight(context, 0.25),
                               child: Image.asset(
-                                "Images/cloudy.png",
+                                ImageSelection(snapshot.data[0].icon),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -110,8 +184,8 @@ class _HomePageState extends State<HomePage> {
                                   child: Text(
                                     "${KelvinToCelcius(snapshot.data[0].temp)}",
                                     style: TextStyle(
-                                      fontSize:
-                                          Resposive.ResponsiveWidth(context, 0.24),
+                                      fontSize: Resposive.ResponsiveWidth(
+                                          context, 0.24),
                                       fontWeight: FontWeight.bold,
                                       color: AppTheme.headingFontColor,
                                     ),
@@ -119,7 +193,8 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 Container(
                                   margin: EdgeInsets.only(bottom: 65),
-                                  child: Icon(Icons.circle,color: AppTheme.headingFontColor),
+                                  child: Icon(Icons.circle,
+                                      color: AppTheme.headingFontColor),
                                 ),
                               ],
                             ),
@@ -129,7 +204,8 @@ class _HomePageState extends State<HomePage> {
                             child: Column(
                               children: [
                                 Container(
-                                  child: Text(//
+                                  child: Text(
+                                    //
                                     '${snapshot.data[0].main}',
                                     style: TextStyle(
                                       fontSize: Resposive.ResponsiveWidth(
@@ -220,12 +296,19 @@ class _HomePageState extends State<HomePage> {
                                   Container(
                                     child: Column(
                                       children: [
+                                        SizedBox(
+                                          height: 2,
+                                        ),
                                         Icon(
                                           FontAwesomeIcons.compass,
+                                          size: 20,
                                           color: AppTheme.headingFontColor,
                                         ),
+                                        SizedBox(
+                                          height: 2,
+                                        ),
                                         Text(
-                                          '87%',
+                                          '${snapshot.data[0].deg}`',
                                           style: TextStyle(
                                             fontSize: Resposive.ResponsiveWidth(
                                                 context, 0.03),
@@ -257,7 +340,7 @@ class _HomePageState extends State<HomePage> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       child: TextField(
-                        // controller: widget.controller,
+                        controller: controller,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20.0),
@@ -277,7 +360,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     InkWell(
                       onTap: () {
-                        // widget.runner();
+                        ChangeCity();
                       },
                       child: Container(
                         padding:
@@ -301,10 +384,71 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
+              return Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    child: Image.asset("Images/error.png"),
+                  ),
+                  Text(
+                    "Please Enter Valid City",
+                    style: TextStyle(
+                        color: AppTheme.headingFontColor,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 20),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child: TextField(
+                      // controller: widget.controller,
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        filled: true,
+                        hintStyle: TextStyle(
+                            color: AppTheme.headingFontColor,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold),
+                        hintText: "Enter City Name",
+                        fillColor: AppTheme.primarybackground,
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      ChangeCity();
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 80, vertical: 13),
+                      margin: EdgeInsets.only(top: 10),
+                      decoration: BoxDecoration(
+                        color: AppTheme.primarybackground,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        'SEE WEATHER REPORT',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: AppTheme.headingFontColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              );
             }
-            return Center(
-              child: CircularProgressIndicator(),
+            return Container(
+              alignment: Alignment.center,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
             );
           },
         ),
