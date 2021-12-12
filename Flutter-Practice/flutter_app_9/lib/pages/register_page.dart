@@ -79,16 +79,20 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             Container(
               margin: EdgeInsets.only(top: 20),
-              child: TextField(
-                controller: emailController,
-                decoration: InputDecoration(hintText: "Enter Username"),
+              child: Card(
+                child: TextField(
+                  controller: emailController,
+                  decoration: InputDecoration(hintText: "Enter Username"),
+                ),
               ),
             ),
             Container(
               margin: EdgeInsets.only(top: 20),
-              child: TextField(
-                controller: passwordController,
-                decoration: InputDecoration(hintText: "Enter Password"),
+              child: Card(
+                child: TextField(
+                  controller: passwordController,
+                  decoration: InputDecoration(hintText: "Enter Password"),
+                ),
               ),
             ),
             Container(
