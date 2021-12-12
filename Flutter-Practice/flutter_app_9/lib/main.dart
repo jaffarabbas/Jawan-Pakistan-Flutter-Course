@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_9/pages/home_page.dart';
+import 'package:flutter_app_9/pages/select_authentication.dart';
 
 void main(){
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
 
           // Once complete, show your application
           if (snapshot.connectionState == ConnectionState.done) {
-            return HomePage();
+            return AuthSelecter();
           }
 
           // Otherwise, show something whilst waiting for initialization to complete
