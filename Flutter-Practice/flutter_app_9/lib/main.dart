@@ -1,16 +1,26 @@
+// ignore_for_file: unnecessary_null_comparison
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_9/pages/home_page.dart';
 import 'package:flutter_app_9/pages/select_authentication.dart';
 
-void main(){
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({ Key? key }) : super(key: key);
+class MyApp extends StatefulWidget {
+  MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool flag = false;
   @override
   Widget build(BuildContext context) {
     final Future<FirebaseApp> _initialization = Firebase.initializeApp();
@@ -29,11 +39,30 @@ class MyApp extends StatelessWidget {
 
           // Once complete, show your application
           if (snapshot.connectionState == ConnectionState.done) {
-            return AuthSelecter();
+            FirebaseAuth.instance.authStateChanges().listen((User? user) {
+              if (user == null) {
+                print("Sign out");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AuthSelecter(),
+                  ),
+                );
+              } else {
+                print("Sign in");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        HomePage(user: user),
+                  ),
+                );
+              }
+            });
           }
 
           // Otherwise, show something whilst waiting for initialization to complete
-          return CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator());
         },
       ),
     );
