@@ -20,7 +20,7 @@ class _AuthSelecterState extends State<AuthSelecter> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Flutter Authentication",
+              "Flutter CRUD App",
               style: TextStyle(
                   fontSize: 30,
                   color: Colors.blueAccent,
