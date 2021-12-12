@@ -21,12 +21,12 @@ class _LoginPageState extends State<LoginPage> {
               email: emailController.value.text,
               password: passwordController.value.text);
       _showMyDialog('User Inserted Succesfully', false);
-      if (FirebaseAuth.instance.currentUser != null) {
-        // wrong call in wrong place!
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
             builder: (context) =>
                 Dashboard(email: emailController.value.text)));
-      }
+      // if (FirebaseAuth.instance.currentUser != null) {
+        
+      // }
       emailController.clear();
       passwordController.clear();
     } on FirebaseAuthException catch (e) {
