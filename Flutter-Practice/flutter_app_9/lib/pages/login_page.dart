@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unnecessary_new, unused_local_variable, unnecessary_string_interpolations, non_constant_identifier_names, avoid_types_as_parameter_names
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -14,24 +14,22 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
-  bool flag = false;
+
   void LoginIn() async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
               email: emailController.value.text,
               password: passwordController.value.text)
-          .whenComplete(() => _showMyDialog('User login Succesfully', false));
-
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
-      );
-
-      // if (FirebaseAuth.instance.currentUser != null) {
-
-      // }
+          .then(
+            (User) => Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) =>
+                    HomePage(user: User.user!),
+              ),
+            ),
+          )
+          .catchError((error) => _showMyDialog("$error", true));
       emailController.clear();
       passwordController.clear();
     } on FirebaseAuthException catch (e) {
@@ -63,11 +61,7 @@ class _LoginPageState extends State<LoginPage> {
             TextButton(
               child: const Text('ok'),
               onPressed: () {
-                setState(() {
-                  Navigator.of(context).pop();
-                  flag = true;
-                });
-                print('chec 1 : $flag');
+                Navigator.of(context).pop();
               },
             ),
           ],
@@ -90,16 +84,20 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Container(
               margin: EdgeInsets.only(top: 20),
-              child: TextField(
-                controller: emailController,
-                decoration: InputDecoration(hintText: "Enter Username"),
+              child: Card(
+                child: TextField(
+                  controller: emailController,
+                  decoration: InputDecoration(hintText: "Enter Username"),
+                ),
               ),
             ),
             Container(
               margin: EdgeInsets.only(top: 20),
-              child: TextField(
-                controller: passwordController,
-                decoration: InputDecoration(hintText: "Enter Password"),
+              child: Card(
+                child: TextField(
+                  controller: passwordController,
+                  decoration: InputDecoration(hintText: "Enter Password"),
+                ),
               ),
             ),
             Container(
