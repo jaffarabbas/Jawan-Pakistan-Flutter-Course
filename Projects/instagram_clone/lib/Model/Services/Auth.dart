@@ -1,4 +1,6 @@
-import 'package:fb_login_app/Pages/Home/HomeScreen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:instagram_clone/Pages/Home/HomeScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -14,6 +16,35 @@ class AuthClass {
   );
 
   final storage = new FlutterSecureStorage();
+
+  //facebook login
+
+  void LoginWithFacebook(BuildContext context) async {
+    try{
+      final facebookLoginResult = await FacebookAuth.instance.login();
+      final userData = await FacebookAuth.instance.getUserData();
+      final facebookAuthCredentials = FacebookAuthProvider.credential(facebookLoginResult.accessToken!.token);
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(facebookAuthCredentials);
+
+      //for future use
+      // await FirebaseFirestore.instance.collection('users').add({
+      //   'email':userData['email'];
+      //   'imageUrl':userData['picture']['data']['url'];
+      //   'name':userData['name'];
+      // });
+
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (builder) => HomeScreen(user: userCredential.user!)),
+              (route) => false);
+
+    }catch (e) {
+      print("here---->");
+      final snackBar = SnackBar(content: Text(e.toString()));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
+
   Future<void> googleSignIn(BuildContext context) async {
     try {
       GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
