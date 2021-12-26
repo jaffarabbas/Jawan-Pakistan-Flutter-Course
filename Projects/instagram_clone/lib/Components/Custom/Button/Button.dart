@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 
-import 'package:fb_login_app/Config/size_config.dart';
+import 'package:instagram_clone/Config/size_config.dart';
 import 'package:flutter/material.dart';
 
 class ButtonText extends StatelessWidget {
