@@ -1,10 +1,10 @@
 // ignore_for_file: file_names
 
-import 'package:fb_login_app/Components/Custom/Button/Button.dart';
-import 'package:fb_login_app/Components/Custom/Button/ButtonColored.dart';
-import 'package:fb_login_app/Config/size_config.dart';
-import 'package:fb_login_app/Pages/Login/SignIn/SignInSrceen.dart';
-import 'package:fb_login_app/Pages/Login/SignUp/SignUpSrceen.dart';
+import 'package:instagram_clone/Components/Custom/Button/Button.dart';
+import 'package:instagram_clone/Components/Custom/Button/ButtonColored.dart';
+import 'package:instagram_clone/Config/size_config.dart';
+import 'package:instagram_clone/Pages/Login/SignIn/SignInSrceen.dart';
+import 'package:instagram_clone/Pages/Login/SignUp/SignUpSrceen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
