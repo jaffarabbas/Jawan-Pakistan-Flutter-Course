@@ -2,7 +2,7 @@
 
 import 'dart:async';
 
-import 'package:fb_login_app/Pages/Login/Intro/Introduction.dart';
+import 'package:instagram_clone/Pages/Login/Intro/Introduction.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
