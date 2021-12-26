@@ -1,7 +1,8 @@
 
-import 'package:fb_login_app/Config/size_config.dart';
-import 'package:fb_login_app/Config/theme.dart';
-import 'package:fb_login_app/Pages/Splash/Splash.dart';
+import 'package:instagram_clone/Config/size_config.dart';
+import 'package:instagram_clone/Config/theme.dart';
+import 'package:instagram_clone/Pages/Post/post.dart';
+import 'package:instagram_clone/Pages/Splash/Splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'KOLACHI',
       theme: theme(),
-      home: const SplashScreen(),
+      home: PostPage(),
     );
   }
 }
