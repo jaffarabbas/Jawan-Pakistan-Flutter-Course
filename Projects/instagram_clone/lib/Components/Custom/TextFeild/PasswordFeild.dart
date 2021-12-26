@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
-import 'package:fb_login_app/Config/size_config.dart';
-import 'package:fb_login_app/Model/TextFeildModel.dart';
+import 'package:instagram_clone/Config/size_config.dart';
+import 'package:instagram_clone/Model/TextFeildModel.dart';
 import 'package:flutter/material.dart';
 
 class PasswordFeild extends StatefulWidget {
