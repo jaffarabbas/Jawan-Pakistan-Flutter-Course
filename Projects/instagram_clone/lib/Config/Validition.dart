@@ -1,5 +1,5 @@
 
-import 'package:fb_login_app/Config/constants.dart';
+import 'package:instagram_clone/Config/constants.dart';
 
 validtionConstantName(String name) {
   List<dynamic> toReturn = [true, ""]; 
