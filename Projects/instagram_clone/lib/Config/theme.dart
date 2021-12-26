@@ -1,4 +1,4 @@
-import 'package:fb_login_app/Config/size_config.dart';
+import 'package:instagram_clone/Config/size_config.dart';
 import 'package:flutter/material.dart';
 
 import 'constants.dart';
