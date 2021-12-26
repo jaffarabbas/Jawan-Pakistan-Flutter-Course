@@ -1,11 +1,11 @@
 // ignore_for_file: file_names
 
-import 'package:fb_login_app/Config/constants.dart';
-import 'package:fb_login_app/Config/size_config.dart';
-import 'package:fb_login_app/Config/theme.dart';
-import 'package:fb_login_app/Model/Services/Auth.dart';
-import 'package:fb_login_app/Pages/Login/SignIn/SignInSrceen.dart';
-import 'package:fb_login_app/Pages/Login/SignUp/SignUpSrceen.dart';
+import 'package:instagram_clone/Config/constants.dart';
+import 'package:instagram_clone/Config/size_config.dart';
+import 'package:instagram_clone/Config/theme.dart';
+import 'package:instagram_clone/Model/Services/Auth.dart';
+import 'package:instagram_clone/Pages/Login/SignIn/SignInSrceen.dart';
+import 'package:instagram_clone/Pages/Login/SignUp/SignUpSrceen.dart';
 import 'package:flutter/material.dart';
 
 class SocialMedia extends StatefulWidget {
@@ -77,7 +77,7 @@ class _SocialMediaState extends State<SocialMedia> {
     );
 
     toReturn = GestureDetector(
-      onTap: () {isFacebook? (){} : auth.googleSignIn(context);},
+      onTap: () {isFacebook? auth.LoginWithFacebook(context) : auth.googleSignIn(context);},
       child: Container(
         decoration: BoxDecoration(
             gradient: primaryGradient, boxShadow: [getShadow(primaryColor)]),
