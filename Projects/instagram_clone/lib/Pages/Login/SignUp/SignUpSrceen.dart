@@ -1,15 +1,15 @@
 // ignore_for_file: file_names
 
-import 'package:fb_login_app/Components/Custom/Alert/AlertBox1.dart';
-import 'package:fb_login_app/Components/Custom/Button/ButtonColored.dart';
-import 'package:fb_login_app/Components/Custom/TextFeild/PasswordFeild.dart';
-import 'package:fb_login_app/Components/Custom/TextFeild/TextFeild_1.dart';
-import 'package:fb_login_app/Config/Validition.dart';
-import 'package:fb_login_app/Config/constants.dart';
-import 'package:fb_login_app/Config/size_config.dart';
-import 'package:fb_login_app/Model/TextFeildModel.dart';
-import 'package:fb_login_app/Pages/Home/HomeScreen.dart';
-import 'package:fb_login_app/Pages/Login/SocialMeida/SocialMedia.dart';
+import 'package:instagram_clone/Components/Custom/Alert/AlertBox1.dart';
+import 'package:instagram_clone/Components/Custom/Button/ButtonColored.dart';
+import 'package:instagram_clone/Components/Custom/TextFeild/PasswordFeild.dart';
+import 'package:instagram_clone/Components/Custom/TextFeild/TextFeild_1.dart';
+import 'package:instagram_clone/Config/Validition.dart';
+import 'package:instagram_clone/Config/constants.dart';
+import 'package:instagram_clone/Config/size_config.dart';
+import 'package:instagram_clone/Model/TextFeildModel.dart';
+import 'package:instagram_clone/Pages/Home/HomeScreen.dart';
+import 'package:instagram_clone/Pages/Login/SocialMeida/SocialMedia.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
