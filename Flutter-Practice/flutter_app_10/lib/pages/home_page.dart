@@ -37,30 +37,6 @@ class _HomePageState extends State<HomePage> {
     controller.clear();
   }
 
-  Future<void> deleteTask(String id) {
-    CollectionReference taskRefrence = FirebaseFirestore.instance
-        .collection('task')
-        .doc(currentUser.email)
-        .collection('${currentUser.email}Task');
-    return taskRefrence.doc(id).delete();
-  }
-
-  Future<void> updateUser(String id) {
-    CollectionReference taskRefrence = FirebaseFirestore.instance
-        .collection('task')
-        .doc(currentUser.email)
-        .collection('${currentUser.email}Task');
-    return taskRefrence
-        .doc(id)
-        .update({
-          'task': updateController.value.text,
-          'date':
-              '${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}-${DateTime.now()}'
-        })
-        .then((value) => print("User Updated"))
-        .catchError((error) => print("Failed to update user: $error"));
-  }
-
   Future<void> _showMyDialog(String value, bool state) async {
     return showDialog<void>(
       context: context,
@@ -94,46 +70,6 @@ class _HomePageState extends State<HomePage> {
         .whenComplete(() => FirebaseAuth.instance.signOut());
   }
 
-  Future<void> UpdateTask(String id) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Update Task'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Container(
-                  child: Container(
-                    child: TextField(
-                      controller: updateController,
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 20, bottom: 20),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      updateUser(id);
-                      Navigator.of(context).pop();
-                      _showMyDialog("Update Text", false);
-                      controller.clear();
-                    },
-                    child: Text(
-                      "Update Data",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
   String ChatRommId(String userid,String FriendId) {
     if(userid[0].toLowerCase().codeUnits[0] > FriendId[0].toLowerCase().codeUnits[0]){
       return "$userid$FriendId";
@@ -153,6 +89,9 @@ class _HomePageState extends State<HomePage> {
    }
   }
 
+  Future<void> RemoveCurrentUserData(Map user, String data)async {
+    user.removeWhere((key, value) => value["userId"] == data);
+  }
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> userStream =
