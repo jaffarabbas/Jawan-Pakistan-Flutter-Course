@@ -23,7 +23,7 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 100),
+    Timer(Duration(milliseconds: 200),
                         () => _scrollController.jumpTo(_scrollController.position.maxScrollExtent));
     currentUser = widget.user;
   }
@@ -63,12 +63,13 @@ class _ChatPageState extends State<ChatPage> {
 
   //Messages
   Future<void> SendMessages(String id, String message) async {
-    print("here");
-    await FirebaseFirestore.instance
+     if(message.trim().isNotEmpty){
+       await FirebaseFirestore.instance
         .collection('ChatMessages')
         .doc(currentUser['chatRoomId'])
         .collection('Messages')
         .add({'userId': id, 'messages': message, 'timeStamp': DateTime.now()});
+     }
   }
 
   void isCurrentUser() async {
@@ -145,7 +146,7 @@ class _ChatPageState extends State<ChatPage> {
                 children: [
                   Container(
                     child: Container(
-                      width: 300,
+                      width: 290,
                       child: TextField(
                         controller: controller,
                         decoration: InputDecoration(hintText: "Enter Messages"),
@@ -153,16 +154,24 @@ class _ChatPageState extends State<ChatPage> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 20, bottom: 20, left: 10),
-                    child: IconButton(
-                      onPressed: () {
-                        SendMessages(
-                            currentUser['userId'], controller.value.text);
-                            Timer(Duration(milliseconds: 400),
-                        () => _scrollController.jumpTo(_scrollController.position.maxScrollExtent));
-                        controller.clear();
-                      },
-                      icon: Icon(Icons.send_sharp),
+                    margin: EdgeInsets.only(left: 10),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.green,
+                      radius: 20,
+                      child: Container(
+                        margin: EdgeInsets.only(left: 3),
+                        child: IconButton(
+                          color: Colors.white,
+                          onPressed: () {
+                            SendMessages(
+                                currentUser['userId'], controller.value.text);
+                                Timer(Duration(milliseconds: 400),
+                            () => _scrollController.jumpTo(_scrollController.position.maxScrollExtent));
+                            controller.clear();
+                          },
+                          icon: Icon(Icons.send_sharp),
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -200,8 +209,14 @@ Widget CardItem(Map data, currentId) => Container(
                         bottomRight: Radius.circular(20))
                   ),
                 padding: EdgeInsets.only(left: 20, top: 5,bottom:7),
-                child: Text("${data["messages"]}",
-                    style: TextStyle(fontSize: 20))),
+                child: Column(
+                  children: [
+                    Text("${data["messages"]}",
+                    style: TextStyle(fontSize: 20)),
+                    Text('${data["timeStamp"]}'),
+                  ]
+                )
+                ),
           ],
         ),
       ),
