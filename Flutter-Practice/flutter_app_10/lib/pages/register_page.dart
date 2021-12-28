@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_new
+// ignore_for_file: prefer_const_constructors, unnecessary_new, deprecated_member_use
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_10/pages/login_page.dart';
+import 'package:flutter_gravatar/flutter_gravatar.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -15,15 +16,23 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController emailController = new TextEditingController();
   TextEditingController nameController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+  Gravatar? _gravatar;
+  bool visibalePassword = false;
 
   addData(String userId) async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .add({
-      'userId':userId,
+    await FirebaseFirestore.instance.collection('users').add({
+      'userId': userId,
       'userEmail': emailController.value.text,
-      'username':nameController.value.text,
+      'username': nameController.value.text,
+      'userImage': _gravatar!.imageUrl(),
     });
+  }
+
+  void updateUser(User? user) async {
+    user!.updateDisplayName(nameController.text);
+    _gravatar = Gravatar(emailController.text);
+    user.updatePhotoURL(_gravatar!.imageUrl());
+    print(user);
   }
 
   Future Register() async {
@@ -33,11 +42,12 @@ class _RegisterPageState extends State<RegisterPage> {
               email: emailController.value.text,
               password: passwordController.value.text);
       _showMyDialog('User Inserted Succesfully', false);
+      updateUser(userCredential.user!);
       addData(userCredential.user!.uid);
       emailController.clear();
       nameController.clear();
       passwordController.clear();
-       Navigator.of(context).pushReplacement(
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => LoginPage(),
         ),
@@ -83,56 +93,104 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Register",
-              style: TextStyle(fontSize: 30, color: Colors.blueAccent),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 20),
-              child: Card(
-                child: TextField(
-                  controller: emailController,
-                  decoration: InputDecoration(hintText: "Enter Email"),
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        elevation: 0,
+      ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Register",
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green),
                 ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 20),
-              child: Card(
-                child: TextField(
-                  controller: nameController,
-                  decoration: InputDecoration(hintText: "Enter Username"),
+                Container(
+                  margin: EdgeInsets.only(top: 20),
+                  padding: EdgeInsets.all(10),
+                  child: TextField(
+                    controller: emailController,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                          borderSide: BorderSide(color: Colors.green, width: 0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                          borderSide: BorderSide(color: Colors.green, width: 0),
+                        ),
+                        hintText: "Enter Username"),
+                  ),
                 ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 20),
-              child: Card(
-                child: TextField(
-                  controller: passwordController,
-                  decoration: InputDecoration(hintText: "Enter Password"),
+                Container(
+                  margin: EdgeInsets.only(top: 20),
+                  padding: EdgeInsets.all(10),
+                  child: TextField(
+                    controller: nameController,
+                    decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                          borderSide: BorderSide(color: Colors.green, width: 0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                          borderSide: BorderSide(color: Colors.green, width: 0),
+                        ),
+                        hintText: "Enter Name"),
+                  ),
                 ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 20),
-              child: ElevatedButton(
-                onPressed: () {
-                  Register();
-                  print("Done");
-                },
-                child: Text(
-                  "Regsiter",
-                  style: TextStyle(color: Colors.white),
+                Container(
+                  margin: EdgeInsets.only(top: 20),
+                  padding: EdgeInsets.all(10),
+                  child: TextField(
+                    controller: passwordController,
+                    obscureText: visibalePassword ? false : true,
+                    decoration: InputDecoration(
+                        hintText: "Enter Password",
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                          borderSide: BorderSide(color: Colors.green, width: 0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                          borderSide: BorderSide(color: Colors.green, width: 0),
+                        ),
+                        suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                visibalePassword
+                                    ? visibalePassword = false
+                                    : visibalePassword = true;
+                              });
+                            },
+                            icon: Icon(Icons.remove_red_eye,color: Colors.green,))),
+                  ),
                 ),
-              ),
+                InkWell(
+                  onTap: () {
+                    Register();
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(top: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 60, vertical: 17),
+                    child: Text(
+                      "Resgister",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
