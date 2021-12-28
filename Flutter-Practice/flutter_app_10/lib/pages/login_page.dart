@@ -14,22 +14,18 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
-
+  bool visibalePassword = false;
   void LoginIn() async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
               email: emailController.value.text,
-              password: passwordController.value.text)
-          .then(
-            (User) => Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) =>
-                    HomePage(user: User.user!),
-              ),
-            ),
-          )
-          .catchError((error) => _showMyDialog("$error", true));
+              password: passwordController.value.text);
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => HomePage(user: userCredential.user!),
+        ),
+      );
       emailController.clear();
       passwordController.clear();
     } on FirebaseAuthException catch (e) {
@@ -73,46 +69,90 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Login",
-              style: TextStyle(fontSize: 30, color: Colors.blueAccent),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 20),
-              child: Card(
-                child: TextField(
-                  controller: emailController,
-                  decoration: InputDecoration(hintText: "Enter Username"),
-                ),
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        elevation: 0,
+      ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Center(
+            child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Login",
+                    style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.green),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 20),
+                    padding: EdgeInsets.all(10),
+                    child: TextField(
+                      controller: emailController,
+                      decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                            borderSide:
+                                BorderSide(color: Colors.green, width: 0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                            borderSide:
+                                BorderSide(color: Colors.green, width: 0),
+                          ),
+                          hintText: "Enter Username"),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 20),
+                    padding: EdgeInsets.all(10),
+                    child: TextField(
+                      controller: passwordController,
+                      obscureText: visibalePassword ? false : true,
+                      decoration: InputDecoration(
+                          hintText: "Enter Password",
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                            borderSide:
+                                BorderSide(color: Colors.green, width: 0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                            borderSide:
+                                BorderSide(color: Colors.green, width: 0),
+                          ),
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  visibalePassword
+                                      ? visibalePassword = false
+                                      : visibalePassword = true;
+                                });
+                              },
+                              icon: Icon(Icons.remove_red_eye,color: Colors.green))),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      LoginIn();
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(top: 20),
+                      decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(15),
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal:60,vertical:17),
+                      child: Text(
+                        "Login",
+                        style: TextStyle(color: Colors.white,fontSize: 20),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(top: 20),
-              child: Card(
-                child: TextField(
-                  controller: passwordController,
-                  decoration: InputDecoration(hintText: "Enter Password"),
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 20),
-              child: ElevatedButton(
-                onPressed: () {
-                  LoginIn();
-                },
-                child: Text(
-                  "Login",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
