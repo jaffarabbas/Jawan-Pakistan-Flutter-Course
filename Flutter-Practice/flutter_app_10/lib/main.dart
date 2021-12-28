@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_10/pages/home_page.dart';
-import 'package:flutter_app_10/pages/select_authentication.dart';
+import 'package:flutter_app_10/pages/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AuthSelecter(),
+                    builder: (context) => SplashScreen(),
                   ),
                 );
               } else {
