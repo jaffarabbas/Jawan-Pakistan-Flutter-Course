@@ -5,7 +5,9 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_10/pages/profile.dart';
 import 'package:flutter_app_10/pages/select_authentication.dart';
+import 'package:intl/intl.dart';
 
 class ChatPage extends StatefulWidget {
   Map user;
@@ -23,8 +25,10 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 200),
-                        () => _scrollController.jumpTo(_scrollController.position.maxScrollExtent));
+    Timer(
+        Duration(milliseconds: 200),
+        () => _scrollController
+            .jumpTo(_scrollController.position.maxScrollExtent));
     currentUser = widget.user;
   }
 
@@ -63,13 +67,14 @@ class _ChatPageState extends State<ChatPage> {
 
   //Messages
   Future<void> SendMessages(String id, String message) async {
-     if(message.trim().isNotEmpty){
-       await FirebaseFirestore.instance
-        .collection('ChatMessages')
-        .doc(currentUser['chatRoomId'])
-        .collection('Messages')
-        .add({'userId': id, 'messages': message, 'timeStamp': DateTime.now()});
-     }
+    if (message.trim().isNotEmpty) {
+      await FirebaseFirestore.instance
+          .collection('ChatMessages')
+          .doc(currentUser['chatRoomId'])
+          .collection('Messages')
+          .add(
+              {'userId': id, 'messages': message, 'timeStamp': DateTime.now()});
+    }
   }
 
   void isCurrentUser() async {
@@ -79,9 +84,18 @@ class _ChatPageState extends State<ChatPage> {
         .get();
   }
 
-  void ScrollToEnd(){
-    Timer(Duration(milliseconds: 400),
-                        () => _scrollController.jumpTo(_scrollController.position.maxScrollExtent));
+  void ScrollToEnd() {
+    Timer(
+        Duration(milliseconds: 400),
+        () => _scrollController
+            .jumpTo(_scrollController.position.maxScrollExtent));
+  }
+
+  String TimeStampToTime(Timestamp date) {
+    //Timestamp to date
+    var Final = DateTime.parse(date.toDate().toString());
+    //date to PM format
+    return DateFormat.jm().format(Final).toString();
   }
 
   @override
@@ -95,7 +109,27 @@ class _ChatPageState extends State<ChatPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("${currentUser["username"]}"),
+        leadingWidth: 90,
+        leading: Row(
+          children: [
+            IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back),
+              color: Colors.white,
+            ),
+            CircleAvatar(
+              backgroundImage:
+                  NetworkImage("${widget.user["userImage"]}"),
+            ),
+          ],
+        ),
+        title: Container(
+          // padding: EdgeInsets.only(right: 60),
+          child: Text("${currentUser["username"]}",
+              style: TextStyle(fontSize: 20)),
+        ),
         backgroundColor: Colors.green,
         actions: [
           IconButton(
@@ -112,33 +146,34 @@ class _ChatPageState extends State<ChatPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              height: 580,
+                height: 580,
                 child: StreamBuilder<QuerySnapshot>(
-              stream: userStream,
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasError) {
-                  return Text('Something went wrong');
-                }
-            
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-            
-                return ListView(
-                  shrinkWrap: true,
-                  controller: _scrollController,
-                  children:
-                      snapshot.data!.docs.map((DocumentSnapshot document) {
-                    Map<String, dynamic> data =
-                        document.data()! as Map<String, dynamic>;
-                    return CardItem(data, currentUser['userId']);
-                  }).toList(),
-                );
-              },
-            )),
+                  stream: userStream,
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError) {
+                      return Text('Something went wrong');
+                    }
+
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    return ListView(
+                      shrinkWrap: true,
+                      controller: _scrollController,
+                      children:
+                          snapshot.data!.docs.map((DocumentSnapshot document) {
+                        Map<String, dynamic> data =
+                            document.data()! as Map<String, dynamic>;
+                        return CardItem(
+                            data, currentUser['userId'], TimeStampToTime);
+                      }).toList(),
+                    );
+                  },
+                )),
             Container(
               width: 350,
               height: 70,
@@ -165,8 +200,10 @@ class _ChatPageState extends State<ChatPage> {
                           onPressed: () {
                             SendMessages(
                                 currentUser['userId'], controller.value.text);
-                                Timer(Duration(milliseconds: 400),
-                            () => _scrollController.jumpTo(_scrollController.position.maxScrollExtent));
+                            Timer(
+                                Duration(milliseconds: 400),
+                                () => _scrollController.jumpTo(_scrollController
+                                    .position.maxScrollExtent));
                             controller.clear();
                           },
                           icon: Icon(Icons.send_sharp),
@@ -184,7 +221,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 }
 
-Widget CardItem(Map data, currentId) => Container(
+Widget CardItem(Map data, currentId, TimeStampFunction) => Container(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
@@ -194,29 +231,35 @@ Widget CardItem(Map data, currentId) => Container(
           children: [
             Container(
                 width: 200,
-
                 decoration: BoxDecoration(
                     color: data['userId'] == currentId
                         ? Colors.black38
                         : Colors.greenAccent,
-                    borderRadius:  data['userId'] == currentId ? BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                        bottomLeft: Radius.circular(20)) : 
-                        BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                        bottomRight: Radius.circular(20))
-                  ),
-                padding: EdgeInsets.only(left: 20, top: 5,bottom:7),
+                    borderRadius: data['userId'] == currentId
+                        ? BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                            bottomLeft: Radius.circular(20))
+                        : BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                            bottomRight: Radius.circular(20))),
+                padding: EdgeInsets.only(left: 20, top: 5, bottom: 7),
                 child: Column(
-                  children: [
-                    Text("${data["messages"]}",
-                    style: TextStyle(fontSize: 20)),
-                    Text('${data["timeStamp"]}'),
-                  ]
-                )
-                ),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("${data["messages"]}",
+                          style: TextStyle(fontSize: 20)),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5, right: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text('${TimeStampFunction(data["timeStamp"])}'),
+                          ],
+                        ),
+                      ),
+                    ])),
           ],
         ),
       ),
