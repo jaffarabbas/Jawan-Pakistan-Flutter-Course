@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_10/pages/chat_page.dart';
 import 'package:flutter_app_10/pages/select_authentication.dart';
+import 'package:flutter_app_10/widgits/drawer.dart';
 
 class HomePage extends StatefulWidget {
   User user;
@@ -18,6 +19,7 @@ class _HomePageState extends State<HomePage> {
   TextEditingController controller = new TextEditingController();
   TextEditingController updateController = new TextEditingController();
   late User currentUser;
+  late Map userInformation;
   @override
   void initState() {
     super.initState();
@@ -113,10 +115,6 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Card(
-              child: Text('Email : ${currentUser.email}',
-                  style: TextStyle(color: Colors.blueAccent, fontSize: 16)),
-            ),
             Container(
                 child: StreamBuilder<QuerySnapshot>(
               stream: userStream,
@@ -139,6 +137,8 @@ class _HomePageState extends State<HomePage> {
                     Map<String, dynamic> data =
                         document.data()! as Map<String, dynamic>;
                     data['chatRoomId'] = ChatRommId(currentUser.uid, data["userId"]);
+                    data['currentUser'] = currentUser.uid;
+                    print(data);
                     return CardItem(data,context,AddChatRoomCollection);
                   }).toList(),
                 );
@@ -147,12 +147,13 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      drawer: AppDrawer(user: currentUser,),
     );
   }
 }
 
 Widget CardItem(Map data,BuildContext context,createChatRoom) => Container(
-      child: InkWell(
+      child: data["userId"] != data['currentUser'] ? InkWell(
         onTap: (){
           createChatRoom(data['userId']);
           print(data);
@@ -168,7 +169,11 @@ Widget CardItem(Map data,BuildContext context,createChatRoom) => Container(
           child: Row(
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CircleAvatar(),
+              CircleAvatar(
+                backgroundImage: NetworkImage(
+                  "${data["userImage"]}"
+                ),
+              ),
               Container(
                 padding: EdgeInsets.only(left: 20),
                   child: Text("${data["username"]}",
@@ -176,5 +181,5 @@ Widget CardItem(Map data,BuildContext context,createChatRoom) => Container(
             ],
           ),
         ),
-      ),
+      ) : Container(),
     );
