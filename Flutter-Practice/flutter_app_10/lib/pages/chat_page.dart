@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_10/pages/profile.dart';
 import 'package:flutter_app_10/pages/select_authentication.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 class ChatPage extends StatefulWidget {
@@ -175,7 +176,7 @@ class _ChatPageState extends State<ChatPage> {
                   },
                 )),
             Container(
-              width: 350,
+              width: 350.w,
               height: 70,
               child: Row(
                 children: [
