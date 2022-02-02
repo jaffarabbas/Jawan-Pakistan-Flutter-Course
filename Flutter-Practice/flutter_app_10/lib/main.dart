@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_10/pages/home_page.dart';
 import 'package:flutter_app_10/pages/splash_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,47 +25,50 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     final Future<FirebaseApp> _initialization = Firebase.initializeApp();
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: FutureBuilder(
-        // Initialize FlutterFire:
-        future: _initialization,
-        builder: (context, snapshot) {
-          // Check for errors
-          if (snapshot.hasError) {
-            return Container(
-              child: Text("Error"),
-            );
-          }
-
-          // Once complete, show your application
-          if (snapshot.connectionState == ConnectionState.done) {
-            FirebaseAuth.instance.authStateChanges().listen((User? user) {
-              if (user == null) {
-                print("Sign out");
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SplashScreen(),
-                  ),
-                );
-              } else {
-                print("Sign in");
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        HomePage(user: user),
-                  ),
-                );
-              }
-            });
-          }
-
-          // Otherwise, show something whilst waiting for initialization to complete
-          return Center(child: CircularProgressIndicator());
-        },
+    return ScreenUtilInit(
+      builder: () => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: FutureBuilder(
+          // Initialize FlutterFire:
+          future: _initialization,
+          builder: (context, snapshot) {
+            // Check for errors
+            if (snapshot.hasError) {
+              return Container(
+                child: Text("Error"),
+              );
+            }
+    
+            // Once complete, show your application
+            if (snapshot.connectionState == ConnectionState.done) {
+              FirebaseAuth.instance.authStateChanges().listen((User? user) {
+                if (user == null) {
+                  print("Sign out");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SplashScreen(),
+                    ),
+                  );
+                } else {
+                  print("Sign in");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          HomePage(user: user),
+                    ),
+                  );
+                }
+              });
+            }
+    
+            // Otherwise, show something whilst waiting for initialization to complete
+            return Center(child: CircularProgressIndicator());
+          },
+        ),
       ),
+      designSize: const Size(411, 731),
     );
   }
 }
