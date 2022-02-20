@@ -26,5 +26,4 @@ doc/api/
 *.pptx
 
 #commit Files
-*.py
 *.bat
