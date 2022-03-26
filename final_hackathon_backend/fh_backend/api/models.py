@@ -14,6 +14,7 @@ class User(models.Model):
 class Categories(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
+    image = models.CharField(max_length=500)
     rating = models.IntegerField()
     price = models.IntegerField()
 
@@ -21,6 +22,7 @@ class Categories(models.Model):
 class SubCategories(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
+    image = models.CharField(max_length=500)
     rating = models.IntegerField()
     price = models.IntegerField()
     categories_id = models.IntegerField()
@@ -29,6 +31,17 @@ class SubCategories(models.Model):
 class Packages(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
+    image = models.CharField(max_length=500)
     rating = models.IntegerField()
     price = models.IntegerField()
     subCategories_id = models.IntegerField()
+
+# booking
+class Bookings(models.Model):
+    user_id = models.IntegerField()
+    package_id = models.IntegerField()
+    start_date = models.CharField(max_length=100)
+    end_date = models.CharField(max_length=100)
+    hour = models.IntegerField()
+    total_price = models.IntegerField()
+    status = models.BooleanField()
