@@ -45,7 +45,7 @@ class UserModel {
 
 
 
-    static List<UserModel> fromJsonList(List<dynamic> jsonLst) {
+static List<UserModel> fromJsonList(List<dynamic> jsonLst) {
     List<UserModel> users = [];
     jsonLst.forEach((user) {
       users.add(UserModel.fromJson(user));
