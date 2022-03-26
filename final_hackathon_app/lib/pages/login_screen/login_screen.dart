@@ -32,15 +32,19 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
 
   getData() async {
-    for (var item in (await getApi(api_GET_User))) {
-      users.add(UserModel.fromJson(item));
-    }
+    ApiService apiService = ApiService();
+    users = await apiService.getApi(api_GET_User);
+    return users;
   }
 
   void CheckUser() {
-    print(emailController.value);
-    print(passwordController.value);
-    Navigate(context, HomeScreen());
+    users.forEach((element) {
+      if(element.toJson()["email"] == emailController.text){
+        if(element.toJson()["password"] == passwordController.text){
+          Navigate(context, HomeScreen());
+        }
+      }
+    });
   }
 
   @override
