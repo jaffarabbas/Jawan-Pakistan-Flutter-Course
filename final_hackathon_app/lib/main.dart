@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       builder: () => MaterialApp(
         theme: theme(),
-        home: MoneyTransferScreen(),
+        home: HomeScreen(),
         debugShowCheckedModeBanner: false,
       ),
       designSize: const Size(width,height),
