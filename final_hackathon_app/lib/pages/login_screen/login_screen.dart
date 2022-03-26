@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:final_hackathon_app/Components/button.dart';
@@ -5,11 +6,16 @@ import 'package:final_hackathon_app/Components/input_feild.dart';
 import 'package:final_hackathon_app/Components/text_button.dart';
 import 'package:final_hackathon_app/Components/text_feild.dart';
 import 'package:final_hackathon_app/Config/constants.dart';
+import 'package:final_hackathon_app/Config/router.dart';
 import 'package:final_hackathon_app/Config/theme.dart';
+import 'package:final_hackathon_app/Model/UserModel.dart';
+import 'package:final_hackathon_app/Services/API/API_Route.dart';
+import 'package:final_hackathon_app/Services/API/getApi.dart';
+import 'package:final_hackathon_app/pages/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -19,11 +25,31 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  List<UserModel> users = [];
+
+  @override
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  void Navigation() {
-    
+
+  getData() async {
+    for (var item in (await getApi(api_GET_User))) {
+      users.add(UserModel.fromJson(item));
+    }
   }
+
+  void CheckUser() {
+    print(emailController.value);
+    print(passwordController.value);
+    Navigate(context, HomeScreen());
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
               hintText: 'Password',
               isPassword: true),
           NavigationButton(
-            navigate: () {},
+            navigate: CheckUser,
             text: 'Login',
             height: 49.h,
             width: 270.w,
@@ -62,11 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 width: 10.w,
               ),
-              DynamicTextButton(
-                  function: () {
-                    Navigation();
-                  },
-                  text: 'SignUp')
+              DynamicTextButton(function: CheckUser, text: 'SignUp')
             ],
           ),
         ],

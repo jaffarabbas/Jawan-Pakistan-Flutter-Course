@@ -23,6 +23,9 @@ class NavigationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () {
+        navigate();
+      },
       child: Container(
         alignment: Alignment.center,
         height: height,

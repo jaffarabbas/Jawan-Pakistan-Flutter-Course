@@ -11,7 +11,7 @@ class DynamicTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap:(){
-        function;
+        function();
       },
       child: Text(
         text,
