@@ -1,0 +1,1 @@
+// getX fahad ka kam ke file hai 
