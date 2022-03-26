@@ -13,7 +13,7 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-         Navigate(context, CategoriesScreenScreen());
+         Navigate(context, const CategoriesScreenScreen());
       },
       child: Container(
         height: 270.h,
