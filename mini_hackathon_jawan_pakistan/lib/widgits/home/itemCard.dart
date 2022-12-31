@@ -96,7 +96,7 @@ class _ItemCardState extends State<ItemCard> {
           );
         },
         child: Stack(
-          overflow: Overflow.visible,
+          // overflow: Overflow.visible,
           children: [
             Center(
               child: Container(
