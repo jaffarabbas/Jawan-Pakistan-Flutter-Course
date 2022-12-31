@@ -32,7 +32,7 @@ class _ItemDetialsState extends State<ItemDetials> {
         margin: EdgeInsets.only(bottom: 15),
         alignment: Alignment.center,
         child: Stack(
-          overflow: Overflow.visible,
+          // overflow: Overflow.visible,
           children: [
             Center(
               child: Container(
