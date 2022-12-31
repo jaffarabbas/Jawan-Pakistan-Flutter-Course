@@ -17,7 +17,7 @@ class _SLiderCardState extends State<SLiderCard> {
       padding: EdgeInsets.all(20),
       margin: EdgeInsets.only(bottom: 5),
       child: Stack(
-        overflow: Overflow.visible,
+        // overflow: Overflow.visible,
         children: [
           Center(
             child: Container(
