@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
-          overflow: Overflow.visible,
+          // overflow: Overflow.visible,
           children: [
             Image.asset("assets/images/layout/bg.png",fit:BoxFit.fill,),
             Positioned(
