@@ -94,7 +94,7 @@ class _CartItemState extends State<CartItem> {
           );
         },
         child: Stack(
-          overflow: Overflow.visible,
+          // overflow: Overflow.visible,
           children: [
             Center(
               child: Container(
