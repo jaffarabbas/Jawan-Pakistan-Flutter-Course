@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Stack(
-            overflow: Overflow.visible,
+            // overflow: Overflow.visible,
             children: [
               Positioned(
                 right: -10,
