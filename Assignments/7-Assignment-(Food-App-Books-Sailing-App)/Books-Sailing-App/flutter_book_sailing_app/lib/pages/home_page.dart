@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_book_sailing_app/widgits/bestSellerCollection.dart';
 import 'package:flutter_book_sailing_app/widgits/popularBookCollection.dart';
 import 'package:flutter_book_sailing_app/widgits/theme.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({ Key? key }) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -23,7 +21,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 35,top:10),
+              padding: const EdgeInsets.only(left: 35, top: 10),
               child: Text(
                 'Popular Now',
                 style: TextStyle(
@@ -35,15 +33,14 @@ class _HomePageState extends State<HomePage> {
             ),
             PopularBooksCollection(),
             Padding(
-              padding: const EdgeInsets.only(left: 35,top:14),
+              padding: const EdgeInsets.only(left: 35, top: 14),
               child: Text(
                 'BestSellers',
                 style: TextStyle(
-                  fontSize: 20,
-                  letterSpacing: 3,
-                  fontWeight: FontWeight.w800,
-                  color: AppTheme.primaryFontcolor
-                ),
+                    fontSize: 20,
+                    letterSpacing: 3,
+                    fontWeight: FontWeight.w800,
+                    color: AppTheme.primaryFontcolor),
               ),
             ),
             BestSellerBookCollection(),
